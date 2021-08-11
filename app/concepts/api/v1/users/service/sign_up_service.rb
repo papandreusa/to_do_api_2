@@ -3,7 +3,7 @@ class Api::V1::Users::Service::SignUpService
     new(*args).call
   end
 
-  def initialize(params, context)
+  def initialize(context, params)
     @params = params
     @context = context.except!(:error)
   end
@@ -20,10 +20,13 @@ class Api::V1::Users::Service::SignUpService
   attr_reader :params, :context
 
   def validate
-    contract = Api::V1::Users::Contract::Create.new(User.new)
-    context[:error] = :validation_error and return unless contract.validate(user_params)
+    context[:error] = contract.errors.messages and return unless contract.validate(params)
 
     true
+  end
+
+  def contract
+    @contract ||= Api::V1::Users::Contract::Create.new(User.new)
   end
 
   def create_user
@@ -37,10 +40,7 @@ class Api::V1::Users::Service::SignUpService
   end
 
   def authenticate
-    Api::V1::Users::Service::SignInService.call(params, context)
+    Api::V1::Users::Service::SignInService.call(context, params)
   end
 
-  def user_params
-    params.permit(:username, :password)
-  end
 end

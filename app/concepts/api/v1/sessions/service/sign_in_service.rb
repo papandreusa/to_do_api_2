@@ -1,14 +1,15 @@
-class Api::V1::Users::Service::SignInService
+class Api::V1::Sessions::Service::SignInService
   def self.call(*args)
     new(*args).call
   end
 
-  def initialize(params, context)
+  def initialize(context, params)
     @params = params
     @context = context.except!(:error)
   end
 
   def call
+    find_user
     sign_in
   end
 

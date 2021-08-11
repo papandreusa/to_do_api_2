@@ -3,14 +3,14 @@ class ToDoService
     new(*args).call
   end
 
-  def initialize(params, context)
+  def initialize(context, params)
     @params = params
     @context = context.except!(:error, :data)
   end
 
   def call(&block)
     block ? yield : raise(NotImplementedError)
-  rescue RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     context[:error] = :not_found
   end
 

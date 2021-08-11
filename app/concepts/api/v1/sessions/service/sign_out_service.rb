@@ -1,11 +1,11 @@
-class Api::V1::Users::Service::SignOutService
+class Api::V1::Sessions::Service::SignOutService
   include ::JWTSessions::RailsAuthorization
 
   def self.call(*args)
     new(*args).call
   end
 
-  def initialize(request, context)
+  def initialize(context, request)
     @request = request
     @context = context.except!(:error)
   end
