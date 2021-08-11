@@ -1,0 +1,53 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rails
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/Documentation: 
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'test/**/*.rb'
+    - 'spec/**/*.rb'
+    - 'db/**/*.rb'
+    - 'config/**/*.rb'
+    - 'app/admin/**/*.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/**/*.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/*_create_active_storage_tables.active_storage.rb'
+
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - 'db/migrate/*_create_active_storage_tables.active_storage.rb'
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - '.circleci/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'log/**/*'
+    - 'test/**/*'
+    - 'db/schema.rb'
+    - 'config/initializers/simple_form.rb'
+    - 'config/initializers/simple_form_bootstrap.rb'
