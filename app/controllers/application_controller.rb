@@ -1,15 +1,14 @@
 class ApplicationController < ActionController::API
-  # include Trailblazer::Operation::Controller
 
-  before_action :init
+  before_action :setup
 
   attr_reader :context
 
-  def init
+  def setup
     @context = {}
   end
 
-  private
+  
 
   def render_error
     render json: {

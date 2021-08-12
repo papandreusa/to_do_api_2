@@ -1,11 +1,10 @@
 class Api::V1::Projects::Operation::Create < Trailblazer::Operation
-  # step     Model( Project, :new )
+
   step :build_model!
   step :assign_current_user!
   step :assign_contract!
   step :validate!
   step :save!
-  # ..
 
   def build_model!(options, **)
     options[:model] = ::Project.new
