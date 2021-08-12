@@ -5,6 +5,7 @@ ruby '3.0.0'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'dry-matcher'
 gem 'dry-validation', '1.6'
 gem 'jwt', '~> 2.2'
 gem 'jwt_sessions', '~> 2.6'

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  # include Trailblazer::Operation::Controller
+
   before_action :init
 
   attr_reader :context

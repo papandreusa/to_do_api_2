@@ -1,8 +1,10 @@
-class Api::V1::ProjectsController < Api::V1::StandardController
+class Api::V1::ProjectsController < Api::V1::BaseController
   def index
-    super do
-      Api::V1::Projects::Service::Index.call(context, params)
-    end
+    # super do
+    #   Api::V1::Projects::Service::Index.call(context, params)
+    # end
+    result = Api::V1::Projects::Operation::Index.( user: context[:current_user])
+    endpoint 
   end
 
   def show
@@ -12,9 +14,11 @@ class Api::V1::ProjectsController < Api::V1::StandardController
   end
 
   def create
-    super do
-      Api::V1::Projects::Service::Create.call(context, params)
-    end
+    # super do
+    #   Api::V1::Projects::Service::Create.call(context, params)
+    # end
+    result = Api::V1::Projects::Operation::Create.( params: params, user: context[:current_user])
+    endpoint result
   end
 
   def update

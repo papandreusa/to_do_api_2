@@ -9,7 +9,6 @@ class Api::V1::Sessions::Service::SignInService
   end
 
   def call
-    find_user
     sign_in
   end
 
@@ -18,14 +17,14 @@ class Api::V1::Sessions::Service::SignInService
   attr_reader :params, :context
 
   def sign_in
-    return context[:error] = :not_authorized unless user || user.authenticate(params[:password])
+    return context[:error] = :not_authorized unless user && user.authenticate(params[:password])
 
     context[:current_user] = user
     context[:token] = session.login
   end
 
   def user
-    @user ||= User.find_by(username: params[:username])
+    @user ||= ::User.find_by(username: params[:username])
   end
 
   def payload
