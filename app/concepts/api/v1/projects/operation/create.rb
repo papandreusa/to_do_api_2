@@ -10,8 +10,8 @@ class Api::V1::Projects::Operation::Create < Trailblazer::Operation
     options[:model] = ::Project.new
   end
 
-  def assign_current_user!(options, **)
-    options[:model].user = options[:user]
+  def assign_current_user!(options, user:, **)
+    options[:model].user = user
   end
 
   def assign_contract!(options, **)

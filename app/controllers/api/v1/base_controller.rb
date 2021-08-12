@@ -6,11 +6,19 @@ class Api::V1::BaseController < ApplicationController
 
   before_action :authenticate_user!
 
+  attr_reader :current_user
+
   private
 
   def authenticate_user!
-    authorize_access_request!
-    context[:current_user] = User.find(payload['user_id'])
+    # authorize_access_request!
+    # @current_user = User.find(payload['user_id'])
+    @current_user = User.first
   end
 
+  def not_authorized
+    context[:error] = :unauthorized
+    context[:status] = :unauthorized
+    render_error
+  end
 end
