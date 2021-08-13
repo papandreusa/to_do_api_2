@@ -4,8 +4,8 @@ Rails.application.routes.draw do
       resources :projects
 
       resources :users, only: %i[create index]
-      post :session, controller: :sessions, action: :create
-      delete :session, controller: :sessions, action: :destroy
+      post :sessions, controller: :sessions, action: :create
+      delete :sessions, controller: :sessions, action: :destroy
       resources :sessions, only: %i[create destroy]
       post :refresh, controller: :refresh, action: :create
     end

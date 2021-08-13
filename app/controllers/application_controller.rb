@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   before_action :setup
 
   attr_reader :context
@@ -7,8 +6,6 @@ class ApplicationController < ActionController::API
   def setup
     @context = {}
   end
-
-  
 
   def render_error
     render json: {

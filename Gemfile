@@ -7,10 +7,14 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dry-matcher'
 gem 'dry-validation', '1.6'
+gem 'json-api'
+gem 'jsonapi-serializer'
 gem 'jwt', '~> 2.2'
 gem 'jwt_sessions', '~> 2.6'
+gem 'pagy'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
+gem 'pundit'
 gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 6.1.4'
 gem 'redis', '~> 4.4'
@@ -38,8 +42,8 @@ group :development do
 end
 
 group :test do
-  gem 'json_matchers'
   gem 'dox', require: false
+  gem 'json_matchers'
 end
 
 gem 'tzinfo-data', '~> 2.0', platforms: %i[mingw mswin x64_mingw jruby]

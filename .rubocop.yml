@@ -32,6 +32,7 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Exclude:
     - 'db/migrate/*_create_active_storage_tables.active_storage.rb'
+    - 'app/controllers/concerns/api/v1/endpoint.rb'
 
 Rails/CreateTableWithTimestamps:
   Exclude:
@@ -51,3 +52,6 @@ AllCops:
     - 'db/schema.rb'
     - 'config/initializers/simple_form.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
+
+Style/ClassAndModuleChildren: 
+    EnforcedStyle: compact

@@ -42,5 +42,4 @@ class Api::V1::Users::Service::SignUpService
   def authenticate
     Api::V1::Sessions::Service::SignInService.call(context, params)
   end
-
 end

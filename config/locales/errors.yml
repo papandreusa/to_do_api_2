@@ -1,0 +1,11 @@
+en:
+  statuses:
+    success: Successful Action
+    created: Record Created
+    deleted: Record Deleted
+    unauthorized: UnAuthorized Access
+    forbidden: Forbidden
+    not_found: Record not Found
+    unprocessable_entity: Validation Errors
+    bad_request: 'Something went wrong :('
+    

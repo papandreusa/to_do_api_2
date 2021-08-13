@@ -6,7 +6,6 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def destroy
-    endpoint(operation: Api::V1::Sessions::Operation::Destroy, options: {request: request})
+    endpoint(operation: Api::V1::Sessions::Operation::Destroy, options: { request: request })
   end
-
 end
