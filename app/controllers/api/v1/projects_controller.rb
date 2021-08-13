@@ -1,6 +1,6 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
   def index
-    endpoint(operation: Api::V1::Projects::Operation::Index)
+    endpoint(operation: Api::V1::Projects::Operation::Index, options: {request: request})
   end
 
   def show
@@ -8,7 +8,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   end
 
   def create
-    endpoint(operation: Api::V1::Projects::Operation::Create, options: { user: current_user })
+    endpoint(operation: Api::V1::Projects::Operation::Create, options: {request: request})
   end
 
   def update

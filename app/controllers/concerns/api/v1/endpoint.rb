@@ -8,17 +8,23 @@ module Api::V1::Endpoint
       created: -> (result) { result.success? & result[:acton] == :create },
       deleted: ->(result) { result.success? & result[:action] == :destroy },
       success: -> (result) { result.success? },
+      unauthorized: -> (result) { result.failure? & unauthorised?(result) },
       invalid: -> (result) { result.failure? }
     }
   end
   
   def default_handler
     {
-      success: -> (result, **opts) { render json: result['data'], **opts, status: 200 },
-      created: -> (result, **opts) { render json: result['data'], **opts, status: 200 },
-      deleted: -> (result, **opts) { render json: result['info'], **opts, status: 200 },
-      invalid: -> (result, **) { render json: result['contract'].errors.messages,  status: :unprocessable_entity }
+      success: -> (result, **opts) { render json: {data: result['data']}, **opts, status: 200 },
+      created: -> (result, **opts) { render json: {data: result['data']}, **opts, status: 200 },
+      deleted: -> (result, **opts) { render json: {info: result['info']}, **opts, status: 200 },
+      unauthorized: -> (result, **) { render json: I18n.t(result[:status]),  status: result[:status] },
+      invalid: -> (result, **) { render json: result[:contract]&.errors.messages,  status: :unprocessable_entity }
     }
+  end
+  
+  def unauthorised?(result)
+    result[:status] == :unauthorized
   end
 
   # def endpoint_options
