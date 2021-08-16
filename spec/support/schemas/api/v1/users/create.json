@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "csrf": {
+      "type": "string"
+    },
+    "access": {
+      "type": "string"
+    },
+    "access_expires_at": {
+      "type": "string"
+    },
+    "refresh": {
+      "type": "string"
+    },
+    "refresh_expires_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "csrf",
+    "access",
+    "access_expires_at",
+    "refresh",
+    "refresh_expires_at"
+  ]
+}

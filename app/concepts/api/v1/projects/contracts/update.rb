@@ -8,7 +8,9 @@ class Api::V1::Projects::Contracts::Update < Reform::Form
       optional(:id)
     end
     rule(:name, :id) do
-      key.failure('must be unique') if Project.where(user_id: values[:user_id]).where.not(id: values[:id]).find_by(name: values[:name])
+      if Project.where(user_id: values[:user_id]).where.not(id: values[:id]).find_by(name: values[:name])
+        key.failure('must be unique')
+      end
     end
   end
 end

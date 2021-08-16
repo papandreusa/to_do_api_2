@@ -43,8 +43,10 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner', '~> 2.0'
   gem 'dox', require: false
   gem 'json_matchers'
+  gem 'simplecov', '~> 0.21'
 end
 
 gem 'tzinfo-data', '~> 2.0', platforms: %i[mingw mswin x64_mingw jruby]

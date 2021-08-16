@@ -6,7 +6,7 @@ class Api::V1::Lib::Operations::BaseOperation < Trailblazer::Operation
   step :authorize_request!
   step :set_current_user!
 
-  def setup(options, params:, request:, **)
+  def setup(_options, params:, request:, **)
     @params = params
     @request = request
   end

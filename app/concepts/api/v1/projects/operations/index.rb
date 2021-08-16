@@ -13,10 +13,15 @@ class Api::V1::Projects::Operations::Index < ::Api::V1::Lib::Operations::BaseOpe
     options[:pagy], options[:collection] = pagy(Policies::ProjectPolicy::Scope.new(current_user, Project).resolve)
   end
 
-  def assign_data(options, **)
-    options[:data] = Serializers::ProjectSerializer.new(options[:collection])
+  def assign_data(options, params:, **)
+    options[:data] = Serializers::ProjectSerializer.new(options[:collection], serializer_options(params))
   end
 
   attr_reader :model, :params
-  
+
+  def serializer_options(params)
+    opts = {}
+    opts[:links] = { self: Decorators::ProjectDecorator.collection_url(params) }
+    opts
+  end
 end

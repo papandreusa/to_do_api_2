@@ -1,5 +1,6 @@
 module Api::V1::Endpoint
   include SimpleEndpoint::Controller
+  include Api::V1::Lib
 
   private
 
@@ -58,15 +59,15 @@ module Api::V1::Endpoint
   end
 
   def success_handler(result)
-    render json: result[:data] , status: :ok
+    render json: result[:data], status: :ok
   end
 
   def created_handler(result)
-    render json:  result[:data] , status: :ok
+    render json:  result[:data], status: :created
   end
 
   def deleted_handler(result)
-    render json:  result[:data] , status: :no_content
+    render json:  result[:data], status: :no_content
   end
 
   def unautherized_handler(_result)
@@ -82,7 +83,7 @@ module Api::V1::Endpoint
   end
 
   def unprocessable_entity_handler(result)
-    render json: result[:contract].errors.messages, status: :unprocessable_entity
+    render json: Serializers::ErrorSerializer.new(result[:contract].errors).serialize, status: :unprocessable_entity
   end
 
   def bad_result_handler(_result)

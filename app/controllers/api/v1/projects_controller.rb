@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
-include Api::V1::Projects
+  include Api::V1::Projects
 
   def index
     endpoint operation: Operations::Index
