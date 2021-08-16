@@ -1,4 +1,4 @@
-class Api::V1::Projects::Policy::ProjectPolicy < ::ApplicationPolicy
+class Api::V1::Projects::Policies::ProjectPolicy < ::ApplicationPolicy
   def index?
     true
   end

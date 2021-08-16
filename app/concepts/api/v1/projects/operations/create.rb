@@ -1,6 +1,8 @@
-class Api::V1::Projects::Operation::Create < Api::V1::Lib::Operation::BaseOperation
+class Api::V1::Projects::Operations::Create < Api::V1::Lib::Operations::BaseOperation
+  include Api::V1::Projects
+
   step :model!
-  step Policy::Pundit(Api::V1::Projects::Policy::ProjectPolicy, :create?), name: :project_policy
+  step Policy::Pundit(Policies::ProjectPolicy, :create?), name: :project_policy
   step :assign_contract!
   step :validate!
   step :save_model!
@@ -11,7 +13,7 @@ class Api::V1::Projects::Operation::Create < Api::V1::Lib::Operation::BaseOperat
   end
 
   def assign_contract!(options, **)
-    options[:contract] = Api::V1::Projects::Contract::Create.new(options[:model])
+    options[:contract] = Contracts::Create.new(options[:model])
   end
 
   def validate!(options, params:, **)
@@ -23,6 +25,6 @@ class Api::V1::Projects::Operation::Create < Api::V1::Lib::Operation::BaseOperat
   end
 
   def assign_data(options, **)
-    options[:data] = options[:model]
+    options[:data] = Serializers::ProjectSerializer.new(options[:model])
   end
 end

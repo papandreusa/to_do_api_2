@@ -1,8 +1,7 @@
 class Api::V1::UsersController < ApplicationController
+  include Api::V1::Endpoint
+  
   def create
-    Api::V1::Users::Service::SignUpService.call(context, params)
-    return render_error if context[:error]
-
-    render json: { token: context[:token], message: :signup_success }, status: :created
+    endpoint operation: Api::V1::Users::Operations::Create
   end
 end

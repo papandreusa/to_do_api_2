@@ -1,5 +1,5 @@
 require 'reform/form/dry'
-class Api::V1::Users::Contract::Create < Reform::Form
+class Api::V1::Users::Contracts::Create < Reform::Form
   feature Reform::Form::Dry
 
   property :username

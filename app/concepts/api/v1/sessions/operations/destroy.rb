@@ -1,4 +1,4 @@
-class Api::V1::Sessions::Operation::Destroy < Api::V1::Lib::Operation::BaseOperation
+class Api::V1::Sessions::Operations::Destroy < Api::V1::Lib::Operations::BaseOperation
   step :flush_session!
   pass :set_message
 

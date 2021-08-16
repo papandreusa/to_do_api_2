@@ -1,6 +1,8 @@
-class Api::V1::Projects::Operation::Destroy < Api::V1::Lib::Operation::BaseOperation
+class Api::V1::Projects::Operations::Destroy < Api::V1::Lib::Operations::BaseOperation
+  include Api::V1::Projects
+
   step :model!
-  step Policy::Pundit(Api::V1::Projects::Policy::ProjectPolicy, :destroy?)
+  step Policy::Pundit(Policies::ProjectPolicy, :destroy?)
   step :destroy_model!
 
   def model!(options, params:, **)

@@ -1,12 +1,17 @@
-class Api::V1::Lib::Operation::BaseOperation < Trailblazer::Operation
+class Api::V1::Lib::Operations::BaseOperation < Trailblazer::Operation
   include ::JWTSessions::RailsAuthorization
   include ::Pundit
 
+  pass :setup
   step :authorize_request!
   step :set_current_user!
 
-  def authorize_request!(options, request:, **)
+  def setup(options, params:, request:, **)
+    @params = params
     @request = request
+  end
+
+  def authorize_request!(options, **)
     authorize_access_request!
     payload
   rescue JWTSessions::Errors::Unauthorized

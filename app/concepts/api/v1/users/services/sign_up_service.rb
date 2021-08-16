@@ -1,4 +1,4 @@
-class Api::V1::Users::Service::SignUpService
+class Api::V1::Users::Services::SignUpService
   def self.call(*args)
     new(*args).call
   end
@@ -26,7 +26,7 @@ class Api::V1::Users::Service::SignUpService
   end
 
   def contract
-    @contract ||= Api::V1::Users::Contract::Create.new(User.new)
+    @contract ||= Api::V1::Users::Contracts::Create.new(User.new)
   end
 
   def create_user

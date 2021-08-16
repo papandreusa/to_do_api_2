@@ -1,4 +1,4 @@
-class Api::V1::Sessions::Operation::Create < Trailblazer::Operation
+class Api::V1::Sessions::Operations::Create < Trailblazer::Operation
   step :find_user!
   step :authenticate!
   step :create_session!
