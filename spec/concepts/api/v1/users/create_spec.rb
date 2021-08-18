@@ -1,7 +1,7 @@
 RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
   describe 'POST #create' do
     context 'when valid params' do
-      let(:password) {FFaker::Internet.password(10)}
+      let(:password) { FFaker::Internet.password(10) }
       let(:valid_params) do
         {
           username: FFaker::Lorem.word,
@@ -15,12 +15,12 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
       end
 
       it { expect(response).to have_http_status(:ok) }
-
       it { expect(response.content_type).to include('application/json') }
       it { expect(response).to match_json_schema('api/v1/users/create') }
     end
+
     context 'when invalid params' do
-      let(:password) {FFaker::Internet.password(10)}
+      let(:password) { FFaker::Internet.password(10) }
       let(:valid_params) do
         {
           username: FFaker::Lorem.word,
@@ -34,11 +34,8 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
       end
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
-
       it { expect(response.content_type).to include('application/json') }
-      it { expect(response).to match_json_schema('api/v1/base/error') }
+      it { expect(response).to match_json_schema('api/v1/base/errors') }
     end
-
-
   end
 end

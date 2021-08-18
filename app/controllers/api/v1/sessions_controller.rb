@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
-  include Api::V1::Sessions
   include Api::V1::Endpoint
+  include Api::V1::Sessions
 
   def create
     endpoint(operation: Operations::Create)

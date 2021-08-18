@@ -1,28 +1,29 @@
 RSpec.describe 'Api::V1::Project::Create', type: :request do
   # include ApiDoc::V1::User::Registration::Api
 
-  xdescribe 'POST #create' do
+  describe 'POST #create' do
     # include ApiDoc::V1::User::Registration::Create
 
     describe 'Success' do
-      let(:valid_params) do
-        {
-          name: FFaker::Lorem.word
-        }.to_json
-      end
-      let(:token) { 'token' }
-      let(:json_api_header) do
-        {
-          Authorization: token
-        }
+      let(:valid_params) { { name: 'abcdef' }.to_json }
+      let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+      let!(:user) { create(:user) }
+
+      before do
+        post '/api/v1/projects', params: valid_params, headers: headers.merge(authenticated_header(user))
       end
 
-      before { post '/api/v1/projects', params: valid_params, headers: json_api_headers }
-
-      it 'renders created user', :dox do
-        expect(response).to be_created
-        expect(response).to match_json_schema('user/registration')
+      it 'renders index of projects', :dox do
+        get '/api/v1/projects', headers: headers.merge(authenticated_header(user))
+        expect(response).to have_http_status(:ok)
       end
+
+      it 'renders created project', :dox do
+        post '/api/v1/projects', params: valid_params, headers: headers.merge(authenticated_header(user))
+        expect(response).to have_http_status(:created)
+      end
+
+      xit { expect(response).to match_json_schema('projects/create') }
     end
   end
 end

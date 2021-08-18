@@ -35,11 +35,11 @@ module Api::V1::Endpoint
   end
 
   def created_case?(result)
-    result.success? & result[:acton] == :create
+    result.success? & result[:params][:action].to_sym == :create
   end
 
   def deleted_case?(result)
-    result.success? & result[:action] == :destroy
+    result.success? & result[:params][:action].to_sym == :destroy
   end
 
   def unauthorized_case?(result)

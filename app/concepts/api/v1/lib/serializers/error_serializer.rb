@@ -1,5 +1,4 @@
 class Api::V1::Lib::Serializers::ErrorSerializer
-
   def initialize(resource)
     @resource = resource
     @result = {}
@@ -15,8 +14,7 @@ class Api::V1::Lib::Serializers::ErrorSerializer
     result
   end
 
-  private 
+  private
 
   attr_reader :resource, :result
-
 end
