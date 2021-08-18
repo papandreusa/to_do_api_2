@@ -8,12 +8,19 @@ class Api::V1::Users::Contracts::Create < Reform::Form
 
   validation :default do
     params do
-      required(:username).filled
-      required(:password).filled(min_size?: 4)
+      required(:username).filled(min_size?: 3, max_size?: 50)
+      required(:password).filled(min_size?: 8)
       required(:password_confirmation)
     end
+
     rule(:username) do
       key.failure('must be unique') if User.find_by(username: value)
+    end
+
+    rule(:password) do
+      unless Api::V1::Users::Constants::PASSWORD_REGEX.match?(value)
+        key.failure('has invalid format')
+      end
     end
 
     rule(:password_confirmation) do

@@ -25,7 +25,7 @@ module Api::V1::Endpoint
     {
       success: ->(result, **) { success_handler(result) },
       created: ->(result, **) { created_handler(result) },
-      deleted: ->(result, **) { deleted_hadler(result) },
+      deleted: ->(result, **) { deleted_handler(result) },
       unauthorized: ->(result, **) { unautherized_handler(result) },
       forbidden: ->(result, **) { forbidden_handler(result) },
       not_found: ->(result, **) { not_found_handler(result) },
@@ -35,11 +35,11 @@ module Api::V1::Endpoint
   end
 
   def created_case?(result)
-    result.success? & result[:params][:action].to_sym == :create
+    result.success? and result[:params][:action].to_sym == :create
   end
 
   def deleted_case?(result)
-    result.success? & result[:params][:action].to_sym == :destroy
+    result.success? and result[:params][:action].to_sym == :destroy
   end
 
   def unauthorized_case?(result)
@@ -47,7 +47,7 @@ module Api::V1::Endpoint
   end
 
   def forbidden_case?(result)
-    result.failure? & result['result.policy.default']&.failure?
+    result.failure? and result['result.policy.default']&.failure?
   end
 
   def not_found_case?(result)
@@ -55,7 +55,7 @@ module Api::V1::Endpoint
   end
 
   def unprocessable_entity_case?(result)
-    result.failure? & result[:contract]&.errors.present?
+    result.failure? and result[:contract]&.errors.present?
   end
 
   def success_handler(result)

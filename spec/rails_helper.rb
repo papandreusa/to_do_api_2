@@ -1,5 +1,6 @@
-ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
+SimpleCov.start 'rails'
+ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'

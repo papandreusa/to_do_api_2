@@ -5,12 +5,9 @@ class Api::V1::Lib::Serializers::ErrorSerializer
   end
 
   def serialize
-    result[:errors] = resource&.messages&.map do |attribute, message|
-      {
-        title: attribute,
-        detail: message.join
-      }
-    end
+    result[:errors] = resource&.messages&.map do |attribute, messages|
+      messages.map { |message| { title: attribute, detail: message } }
+    end&.flatten
     result
   end
 

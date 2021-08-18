@@ -8,6 +8,8 @@ class Api::V1::Projects::Operations::Index < ::Api::V1::Lib::Operations::BaseOpe
 
   private
 
+  attr_reader :model, :params
+
   def index!(options, **)
     options[:model] = Project.new
     options[:pagy], options[:collection] = pagy(Policies::ProjectPolicy::Scope.new(current_user, Project).resolve)
@@ -16,8 +18,6 @@ class Api::V1::Projects::Operations::Index < ::Api::V1::Lib::Operations::BaseOpe
   def assign_data(options, params:, **)
     options[:data] = Serializers::ProjectSerializer.new(options[:collection], serializer_options(params))
   end
-
-  attr_reader :model, :params
 
   def serializer_options(params)
     opts = {}

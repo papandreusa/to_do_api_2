@@ -26,5 +26,6 @@ class Api::V1::Projects::Operations::Create < Api::V1::Lib::Operations::BaseOper
 
   def assign_data(options, **)
     options[:data] = Serializers::ProjectSerializer.new(options[:model])
+    options[:status] = :created
   end
 end
