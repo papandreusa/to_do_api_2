@@ -6,6 +6,4 @@ class ApplicationController < ActionController::API
   def setup
     @context = {}
   end
-
-
 end

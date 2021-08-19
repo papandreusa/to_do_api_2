@@ -1,39 +1,24 @@
 RSpec.describe 'Api::V1::Projects::Operations::Show', type: :request do
   include Docs::V1::Projects::Api
+  include Docs::V1::Projects::Show
 
-  # include ApiDoc::V1::User::Registration::Create
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
 
   describe 'Success result' do
-    include Docs::V1::Projects::Show
     before do
       get api_v1_project_path(project), headers: authenticated_header(user)
     end
 
-    it 'responds with status ok', :dox do
+    it 'gets project', :dox do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'renders with json schema', :dox do
-      expect(response).to match_json_schema('v1/projects/project')
-    end
-
+    it { expect(response).to match_json_schema('v1/projects/project') }
     it { expect(JSON.parse(response.body)['data']['attributes']['name']).to eql project.name }
   end
 
   describe 'fail result' do
-
-    context 'when unauthenticated' do
-      before do
-        get api_v1_project_path(project)
-      end
-
-      it 'responses with status unauthorized' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-    end
-
     context 'when get invalid id' do
       let(:invalid_id) { { id: :invalid_id } }
 
@@ -41,10 +26,17 @@ RSpec.describe 'Api::V1::Projects::Operations::Show', type: :request do
         get api_v1_project_path(invalid_id), headers: authenticated_header(user)
       end
 
-      it 'responds with status not_found ' do
+      it 'gets project with invalid id', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
 
+    context 'when unauthenticated' do
+      before do
+        get api_v1_project_path(project)
+      end
+
+      it { expect(response).to have_http_status(:unauthorized) }
+    end
   end
 end

@@ -44,7 +44,7 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 2.0'
-  gem 'dox', require: false
+  gem 'dox', '~> 1.3', require: false
   gem 'json_matchers'
   gem 'simplecov', '~> 0.21'
 end

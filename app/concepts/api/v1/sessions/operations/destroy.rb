@@ -2,7 +2,7 @@ class Api::V1::Sessions::Operations::Destroy < Api::V1::Lib::Operations::BaseOpe
   step :flush_session!
   pass :set_message
 
-  def flush_session!(options, **)
+  def flush_session!(_options, **)
     session = JWTSessions::Session.new(payload: payload)
     session.flush_by_access_payload
   end

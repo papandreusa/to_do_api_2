@@ -1,12 +1,11 @@
 RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
+  let!(:user) { create(:user) }
+  let(:username) { user.username }
+  let(:password) { user.password }
+  let(:valid_params) { { username: username, password: password } }
 
-  let!(:user) { create(:user)}
-  let(:username) {user.username}
-  let(:password) { user.password}
-  let(:valid_params) { {username: username, password: password } }
   describe 'POST #create' do
     context 'when valid params' do
-
       before do
         post api_v1_sessions_path, params: valid_params
       end

@@ -4,7 +4,7 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
       let(:user) { build(:user) }
       let(:username) { user.username }
       let(:password) { user.password }
-      let!(:valid_params) { { username: username, password: password, password_confirmation: password  } }
+      let!(:valid_params) { { username: username, password: password, password_confirmation: password } }
 
       before do
         post api_v1_users_path, params: valid_params
@@ -21,7 +21,7 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
           username: FFaker::Lorem.word,
           password: 'Inv@lid P@$$w0rd',
           password_confirmation: 'inValid pAssword'
-      }
+        }
       end
 
       before do

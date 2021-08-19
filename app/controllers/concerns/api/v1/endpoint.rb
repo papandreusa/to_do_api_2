@@ -70,16 +70,16 @@ module Api::V1::Endpoint
     render json:  result[:data], status: :no_content
   end
 
-  def unautherized_handler(_result)
-    render json: I18n.t(:unauthorized, scope: :statuses), status: :unauthorized
+  def unautherized_handler(_)
+    render  I18n.t(:unauthorized, scope: :statuses), status: :unauthorized
   end
 
-  def forbidden_handler(_result)
-    render json: I18n.t(:forbidden, scope: :statuses), status: :forbidden
+  def forbidden_handler(_)
+    render  I18n.t(:forbidden, scope: :statuses), status: :forbidden
   end
 
-  def not_found_handler(_result)
-    render json: I18n.t(:not_found, scope: :statuses), status: :not_found
+  def not_found_handler(_)
+    render I18n.t(:not_found, scope: :statuses), status: :not_found
   end
 
   def unprocessable_entity_handler(result)
@@ -87,6 +87,6 @@ module Api::V1::Endpoint
   end
 
   def bad_request_handler(_)
-    render json: I18n.t(:bad_request, scope: :statuses), status: :bad_request
+    render I18n.t(:bad_request, scope: :statuses), status: :bad_request
   end
 end

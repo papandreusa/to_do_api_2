@@ -3,7 +3,6 @@ module Docs
     module Projects
       extend Dox::DSL::Syntax
 
-      # define common resource data for each action
       document :api do
         resource 'Projects' do
           endpoint '/projects'
@@ -11,21 +10,20 @@ module Docs
         end
       end
 
-      # define data for specific action
       document :index do
-        action 'Get projects'
+        action 'Get Projects'
       end
       document :show do
-        action 'Get project'
+        action 'Get Project'
       end
       document :create do
-        action 'Post project'
+        action 'Create Project'
       end
       document :update do
-        action 'Put project'
+        action 'Update Project'
       end
       document :destroy do
-        action 'Delete project'
+        action 'Delete Project'
       end
     end
   end

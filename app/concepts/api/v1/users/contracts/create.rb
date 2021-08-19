@@ -18,9 +18,7 @@ class Api::V1::Users::Contracts::Create < Reform::Form
     end
 
     rule(:password) do
-      unless Api::V1::Users::Constants::PASSWORD_REGEX.match?(value)
-        key.failure('has invalid format')
-      end
+      key.failure('has invalid format') unless Api::V1::Users::Constants::PASSWORD_REGEX.match?(value)
     end
 
     rule(:password_confirmation) do
