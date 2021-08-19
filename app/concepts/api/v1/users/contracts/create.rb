@@ -6,7 +6,7 @@ class Api::V1::Users::Contracts::Create < Reform::Form
   property :password
   property :password_confirmation, virtual: true
 
-  validation :default do
+  validation name: :default do
     params do
       required(:username).filled(min_size?: 3, max_size?: 50)
       required(:password).filled(min_size?: 8)

@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
+RSpec.describe 'Api::V1::Sessions::Opeartion::Destroy', type: :request do
 
   let!(:user) { create(:user)}
   let(:username) {user.username}
@@ -13,7 +13,7 @@ RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
 
       it { expect(response).to have_http_status(:no_content) }
 
-      context 'when get data' do
+      context 'when get data after logout' do
         before do
           get api_v1_projects_path, headers: headers
         end
@@ -21,6 +21,14 @@ RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
         it 'responses with status ' do
           expect(response).to have_http_status(:unauthorized)
         end
+      end
+
+      context 'when logout again' do
+        before do
+          delete api_v1_sessions_path, headers: headers
+        end
+  
+        it { expect(response).to have_http_status(:unauthorized) }
       end
     end
 

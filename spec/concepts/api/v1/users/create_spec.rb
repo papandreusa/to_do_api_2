@@ -11,8 +11,7 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
       end
 
       it { expect(response).to have_http_status(:created) }
-      it { expect(response.content_type).to include('application/json') }
-      it { expect(response).to match_json_schema('api/v1/sessions/create') }
+      it { expect(response).to match_json_schema('v1/sessions/create') }
     end
 
     context 'when invalid params' do
@@ -20,9 +19,9 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
       let(:invalid_params) do
         {
           username: FFaker::Lorem.word,
-          password: password,
+          password: 'Inv@lid P@$$w0rd',
           password_confirmation: 'inValid pAssword'
-      }.to_json
+      }
       end
 
       before do
@@ -31,7 +30,7 @@ RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
       it { expect(response.content_type).to include('application/json') }
-      it { expect(response).to match_json_schema('api/v1/base/errors') }
+      it { expect(response).to match_json_schema('v1/base/errors') }
     end
   end
 end

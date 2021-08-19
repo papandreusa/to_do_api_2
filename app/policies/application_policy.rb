@@ -14,8 +14,5 @@ class ApplicationPolicy
       @scope = scope
     end
 
-    def resolve
-      scope.all
-    end
   end
 end

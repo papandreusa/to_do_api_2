@@ -5,9 +5,6 @@ class Api::V1::Sessions::Operations::Destroy < Api::V1::Lib::Operations::BaseOpe
   def flush_session!(options, **)
     session = JWTSessions::Session.new(payload: payload)
     session.flush_by_access_payload
-  rescue JWTSessions::Errors::Unauthorized
-    options[:status] = :unauthorized
-    false
   end
 
   def set_message(options, **)

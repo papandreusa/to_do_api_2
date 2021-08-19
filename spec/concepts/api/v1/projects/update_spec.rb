@@ -1,5 +1,5 @@
 RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
-  # include ApiDoc::V1::User::Registration::Api
+  include Docs::V1::Projects::Api
 
   # include ApiDoc::V1::User::Registration::Create
   let(:name) { FFaker::Lorem.word }
@@ -7,6 +7,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
   describe 'Success result' do
+    include Docs::V1::Projects::Update
     before do
       put api_v1_project_path(project), params: valid_params, headers:authenticated_header(user)
     end
@@ -16,7 +17,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
     end
 
     it 'renders with json schema' do
-      expect(response).to match_json_schema('api/v1/projects/project')
+      expect(response).to match_json_schema('v1/projects/project')
     end
 
     it { expect(JSON.parse(response.body)['data']['attributes']['name']).to eql name }

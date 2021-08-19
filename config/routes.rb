@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[create index]
       post :sessions, controller: :sessions, action: :create
       delete :sessions, controller: :sessions, action: :destroy
-      resources :sessions, only: %i[create destroy]
+      # resources :sessions, only: %i[create destroy]
       post :refresh, controller: :refresh, action: :create
     end
   end

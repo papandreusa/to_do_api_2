@@ -1,11 +1,12 @@
 RSpec.describe 'Api::V1::Projects::Operations::Destroy', type: :request do
-  # include ApiDoc::V1::User::Registration::Api
+  include Docs::V1::Projects::Api
 
   # include ApiDoc::V1::User::Registration::Create
   let(:name) { FFaker::Lorem.word }
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
   describe 'Success result' do
+    include Docs::V1::Projects::Destroy
     before do
       delete api_v1_project_path(project), headers: authenticated_header(user)
     end

@@ -30,7 +30,7 @@ module Api::V1::Endpoint
       forbidden: ->(result, **) { forbidden_handler(result) },
       not_found: ->(result, **) { not_found_handler(result) },
       unprocessable_entity: ->(result, **) { unprocessable_entity_handler(result) },
-      bad_request: ->(_result, **) { bad_request_handler(result) }
+      bad_request: ->(result, **) { bad_request_handler(result) }
     }
   end
 
@@ -86,7 +86,7 @@ module Api::V1::Endpoint
     render json: Serializers::ErrorSerializer.new(result[:contract].errors).serialize, status: :unprocessable_entity
   end
 
-  def bad_result_handler(_result)
+  def bad_request_handler(_)
     render json: I18n.t(:bad_request, scope: :statuses), status: :bad_request
   end
 end

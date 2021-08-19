@@ -1,0 +1,447 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/projects": {
+      "post": {
+        "summary": "Post project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5": {
+              "examples": {
+                "renders created project": {
+                  "summary": "renders created project",
+                  "value": "name=nostrum"
+                },
+                "renders with json schema": {
+                  "summary": "renders with json schema",
+                  "value": "name=aliquid"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "renders created project": {
+                    "summary": "renders created project",
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "type": "project",
+                        "attributes": {
+                          "name": "nostrum"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "1",
+                              "type": "user"
+                            }
+                          }
+                        },
+                        "links": {
+                          "self": "/api/v1/projects/1"
+                        }
+                      }
+                    }
+                  },
+                  "renders with json schema": {
+                    "summary": "renders with json schema",
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "type": "project",
+                        "attributes": {
+                          "name": "aliquid"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "1",
+                              "type": "user"
+                            }
+                          }
+                        },
+                        "links": {
+                          "self": "/api/v1/projects/1"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get projects",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "renders index of projects": {
+                    "summary": "renders index of projects",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "1",
+                          "type": "project",
+                          "attributes": {
+                            "name": "est"
+                          },
+                          "relationships": {
+                            "user": {
+                              "data": {
+                                "id": "1",
+                                "type": "user"
+                              }
+                            }
+                          },
+                          "links": {
+                            "self": "/api/v1/projects/1"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "type": "project",
+                          "attributes": {
+                            "name": "ipsa"
+                          },
+                          "relationships": {
+                            "user": {
+                              "data": {
+                                "id": "1",
+                                "type": "user"
+                              }
+                            }
+                          },
+                          "links": {
+                            "self": "/api/v1/projects/2"
+                          }
+                        }
+                      ],
+                      "links": {
+                        "self": "/api/v1/projects"
+                      }
+                    }
+                  },
+                  "renders with json schema": {
+                    "summary": "renders with json schema",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "1",
+                          "type": "project",
+                          "attributes": {
+                            "name": "numquam"
+                          },
+                          "relationships": {
+                            "user": {
+                              "data": {
+                                "id": "1",
+                                "type": "user"
+                              }
+                            }
+                          },
+                          "links": {
+                            "self": "/api/v1/projects/1"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "type": "project",
+                          "attributes": {
+                            "name": "odit"
+                          },
+                          "relationships": {
+                            "user": {
+                              "data": {
+                                "id": "1",
+                                "type": "user"
+                              }
+                            }
+                          },
+                          "links": {
+                            "self": "/api/v1/projects/2"
+                          }
+                        }
+                      ],
+                      "links": {
+                        "self": "/api/v1/projects"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{id}": {
+      "delete": {
+        "summary": "Delete project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "any": {
+              }
+            },
+            "headers": {
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "responds with status ok": {
+                    "summary": "responds with status ok",
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "type": "project",
+                        "attributes": {
+                          "name": "consequuntur"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "1",
+                              "type": "user"
+                            }
+                          }
+                        },
+                        "links": {
+                          "self": "/api/v1/projects/1"
+                        }
+                      }
+                    }
+                  },
+                  "renders with json schema": {
+                    "summary": "renders with json schema",
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "type": "project",
+                        "attributes": {
+                          "name": "eaque"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "1",
+                              "type": "user"
+                            }
+                          }
+                        },
+                        "links": {
+                          "self": "/api/v1/projects/1"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Put project",
+        "tags": [
+          "Projects"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "1"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5": {
+              "examples": {
+                "responses status ok": {
+                  "summary": "responses status ok",
+                  "value": "name=accusamus"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "responses status ok": {
+                    "summary": "responses status ok",
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "type": "project",
+                        "attributes": {
+                          "name": "accusamus"
+                        },
+                        "relationships": {
+                          "user": {
+                            "data": {
+                              "id": "1",
+                              "type": "user"
+                            }
+                          }
+                        },
+                        "links": {
+                          "self": "/api/v1/projects/1"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Projects",
+      "description": ""
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Projects",
+      "tags": [
+        "Projects"
+      ]
+    }
+  ]
+}

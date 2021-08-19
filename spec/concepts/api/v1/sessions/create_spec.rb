@@ -12,21 +12,19 @@ RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
       end
 
       it { expect(response).to have_http_status(:created) }
-      it { expect(response.content_type).to include('application/json') }
-      it { expect(response).to match_json_schema('api/v1/sessions/create') }
+      it { expect(response).to match_json_schema('v1/sessions/create') }
     end
 
     context 'when invalid params' do
       let(:valid_params) do
-        { username: username, password: 'inValid pAssword' }.to_json
+        { username: username, password: 'inValid pAssword' }
       end
 
       before do
         post api_v1_sessions_path, params: valid_params
       end
 
-      it { expect(response).to have_http_status(:not_found) }
-      it { expect(response.content_type).to include('application/json') }
+      it { expect(response).to have_http_status(:bad_request) }
     end
   end
 end

@@ -1,5 +1,5 @@
 RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
-  # include ApiDoc::V1::User::Registration::Api
+  include Docs::V1::Projects::Api
 
   # include ApiDoc::V1::User::Registration::Create
   let(:name) { FFaker::Lorem.word }
@@ -7,6 +7,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
   let!(:user) { create(:user) }
 
   describe 'Success result' do
+    include Docs::V1::Projects::Create
     before do
       post api_v1_projects_path, params: valid_params, headers: authenticated_header(user)
     end
@@ -15,14 +16,15 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
       expect(response).to have_http_status(:created)
     end
 
-    it 'renders with json schema' do
-      expect(response).to match_json_schema('api/v1/projects/project')
+    it 'renders with json schema', :dox do
+      expect(response).to match_json_schema('v1/projects/project')
     end
 
     it { expect(JSON.parse(response.body)['data']['attributes']['name']).to eql name }
   end
 
   describe 'fail result' do
+   
     context 'when unauthenticated' do
       before do
         post api_v1_projects_path, params: valid_params
@@ -41,7 +43,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
       end
 
       it 'renders with json schema ' do
-        expect(response).to match_json_schema('api/v1/base/errors')
+        expect(response).to match_json_schema('v1/base/errors')
       end
     end
   end
