@@ -29,6 +29,7 @@ group :development, :test do
   gem 'ffaker', '~> 2.18'
   gem 'pry-byebug', '~> 3.9'
   gem 'pry-rails', '~> 0.3'
+  gem 'regexp-examples', '~> 1.5'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', '~> 1.12', require: false
   gem 'rubocop-performance', '~> 1.10', require: false

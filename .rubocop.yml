@@ -55,3 +55,11 @@ AllCops:
 
 Style/ClassAndModuleChildren: 
     EnforcedStyle: compact
+
+Naming/InclusiveLanguage:
+  Exclude:
+    - 'spec/support/config/dox.rb'
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'config/initializers/simple_endpoint.rb'

@@ -4,13 +4,14 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
 
   let(:name) { FFaker::Lorem.word }
   let(:valid_params) { { name: name }.to_json }
-  let!(:user) { create(:user) }
-  let!(:project) { create(:project, user: user) }
-  let(:header) { { 'CONTENT_TYPE' => 'application/json' } }
+  let!(:project) { create(:project, user: create(:user)) }
+  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
     before do
-      put api_v1_project_path(project), params: valid_params, headers: header.merge(authenticated_header(user))
+      put api_v1_project_path(project),
+          params: valid_params,
+          headers: headers.merge(authenticated_header(project.user))
     end
 
     it 'puts valid params', :dox do
@@ -24,7 +25,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
   describe 'fail result' do
     context 'when unauthenticated' do
       before do
-        put api_v1_project_path(project), params: valid_params, header: header
+        put api_v1_project_path(project), params: valid_params, headers: headers
       end
 
       it 'responses with status ' do
@@ -36,7 +37,9 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
       let(:invalid_params) { { name: nil }.to_json }
 
       before do
-        put api_v1_project_path(project), params: invalid_params, headers: header.merge(authenticated_header(user))
+        put api_v1_project_path(project),
+            params: invalid_params,
+            headers: headers.merge(authenticated_header(project.user))
       end
 
       it 'posts invalid params' do
@@ -50,7 +53,9 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
       let(:invalid_id) { :invalid_id }
 
       before do
-        put api_v1_project_path(invalid_id), params: valid_params, headers: authenticated_header(user)
+        put api_v1_project_path(invalid_id),
+            params: valid_params,
+            headers: authenticated_header(project.user)
       end
 
       it 'puts project with invalid id', :dox do

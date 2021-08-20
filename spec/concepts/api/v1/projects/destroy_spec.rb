@@ -5,11 +5,11 @@ RSpec.describe 'Api::V1::Projects::Operations::Destroy', type: :request do
   let(:name) { FFaker::Lorem.word }
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
-  let(:header) { { 'CONTENT_TYPE' => 'application/json' } }
+  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
     before do
-      delete api_v1_project_path(project), headers: header.merge(authenticated_header(user))
+      delete api_v1_project_path(project), headers: headers.merge(authenticated_header(user))
     end
 
     it 'deletes project', :dox do
@@ -24,7 +24,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Destroy', type: :request do
       let(:invalid_id) { :invalid_id }
 
       before do
-        delete api_v1_project_path(invalid_id), headers: header.merge(authenticated_header(user))
+        delete api_v1_project_path(invalid_id), headers: headers.merge(authenticated_header(user))
       end
 
       it 'deletes project with invalid id', :dox do
@@ -34,7 +34,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Destroy', type: :request do
 
     context 'when unauthenticated' do
       before do
-        delete api_v1_project_path(project), params: { header: header }
+        delete api_v1_project_path(project), params: { headers: headers }
       end
 
       it { expect(response).to have_http_status(:unauthorized) }

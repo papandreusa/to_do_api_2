@@ -1,4 +1,5 @@
 /.bundle
+/config/master.key
 
 /log/*
 /tmp/*
@@ -15,5 +16,4 @@
 !/storage/.keep
 .byebug_history
 /node_modules
-
-/config/master.key
+yarn.*

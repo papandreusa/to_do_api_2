@@ -20,7 +20,7 @@
     + Body
 
             {
-              "name": "quisquam"
+              "name": "consequatur"
             }
 
 + Response 201
@@ -36,7 +36,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "quisquam"
+                  "name": "consequatur"
                 },
                 "relationships": {
                   "user": {
@@ -96,6 +96,20 @@
 
 + Response 204
 
++ Request deletes project with invalid id
+**DELETE**&nbsp;&nbsp;`/api/v1/projects/invalid_id`
+
+    + Headers
+
+            Content-Type: application/json
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
++ Response 404
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
+
 ### Get Projects [GET /api/v1/projects]
 
 
@@ -120,7 +134,7 @@
                   "id": "1",
                   "type": "project",
                   "attributes": {
-                    "name": "consectetur"
+                    "name": "occaecati"
                   },
                   "relationships": {
                     "user": {
@@ -138,7 +152,7 @@
                   "id": "1",
                   "type": "project",
                   "attributes": {
-                    "name": "illum"
+                    "name": "placeat"
                   },
                   "relationships": {
                     "user": {
@@ -183,7 +197,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "laboriosam"
+                  "name": "tempore"
                 },
                 "relationships": {
                   "user": {
@@ -228,7 +242,7 @@
     + Body
 
             {
-              "name": "corporis"
+              "name": "quasi"
             }
 
 + Response 200
@@ -244,7 +258,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "corporis"
+                  "name": "quasi"
                 },
                 "relationships": {
                   "user": {
@@ -270,7 +284,7 @@
 
     + Body
 
-            {"name":"cum"}
+            {"name":"tenetur"}
 
 + Response 404
 

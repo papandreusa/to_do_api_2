@@ -16,9 +16,11 @@ require 'action_cable/engine'
 require 'rails/test_unit/railtie'
 
 Bundler.require(*Rails.groups)
+
 module ToDoApi2
-  class Application < Rails::Application
-    config.load_defaults 6.1
-    config.api_only = true
-  end
+end
+
+class ToDoApi2::Application < Rails::Application
+  config.load_defaults 6.1
+  config.api_only = true
 end

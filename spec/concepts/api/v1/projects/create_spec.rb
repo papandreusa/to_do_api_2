@@ -4,12 +4,12 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
   let(:name) { FFaker::Lorem.word }
   let(:valid_params) { { name: name }.to_json }
   let!(:user) { create(:user) }
-  let(:header) { { 'CONTENT_TYPE' => 'application/json' } }
+  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
     include Docs::V1::Projects::Create
     before do
-      post api_v1_projects_path, params: valid_params, headers: header.merge(authenticated_header(user))
+      post api_v1_projects_path, params: valid_params, headers: headers.merge(authenticated_header(user))
     end
 
     it 'posts valid params', :dox do
@@ -26,7 +26,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
       let(:invalid_params) { { name: nil }.to_json }
 
       before do
-        post api_v1_projects_path, params: invalid_params, headers: authenticated_header(user)
+        post api_v1_projects_path, params: invalid_params, headers: headers.merge(authenticated_header(user))
       end
 
       it 'posts invalid params', :dox do
@@ -38,10 +38,10 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
 
     context 'when unauthenticated' do
       before do
-        post api_v1_projects_path, params: valid_params
+        post api_v1_projects_path, params: valid_params, headers: headers
       end
 
-      it { expect(response).to have_http_status(:unauthorized), header: header }
+      it { expect(response).to have_http_status(:unauthorized)}
     end
   end
 end

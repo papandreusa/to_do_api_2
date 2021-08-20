@@ -5,7 +5,7 @@ namespace :api do
     md_file = 'spec/docs/v1/docs.md'
     html_file = 'public/docs/v1.html'
 
-    task :md do
+    task md: :environment do
       puts 'md task'
       RSpec::Core::RakeTask.new(:api_spec) do |t|
         t.rspec_opts = "-f Dox::Formatter --order defined --tag dox --out #{md_file}"
@@ -14,7 +14,7 @@ namespace :api do
       Rake::Task['api_spec'].invoke
     end
 
-    task :html do
+    task html: :environment do
       puts 'html task'
       system("aglio -i #{md_file} -o #{html_file}")
     end
