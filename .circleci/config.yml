@@ -1,0 +1,84 @@
+version: 2.1 
+
+orbs:
+  ruby: circleci/ruby@1.0 
+  node: circleci/node@2
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:3.0.0
+        environment:
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.2.3
+          RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      - image: circleci/postgres:12.0
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: to_do_api_2_test
+          POSTGRES_USER: todo
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+commands:
+  initialize:
+    description: build, db setup
+    steps:
+      - checkout 
+      - ruby/install-deps 
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+  run_database_consistency:
+    steps:
+      - run: bundle exec database_consistency
+  run_rubocop:
+    steps:
+      - run: bundle exec rubocop --cache false
+  run_fasterer:
+    steps:
+      - run: bundle exec fasterer
+  run_bundle_audit:
+    steps:
+      - run: bundle exec bundle-audit
+  run_brakeman:
+    steps:
+      - run: bundle exec brakeman
+  run_rspec:
+    steps:
+      - run: bundle exec rspec
+
+jobs:
+  initializing:
+    executor: default
+    steps:
+      - initialize
+  lintering:
+    executor: default
+    steps:
+      - initialize
+      - run_database_consistency
+      - run_rubocop
+      - run_fasterer
+      - run_brakeman
+      - run_bundle_audit
+  testing:
+    executor: default
+    steps:
+      - initialize
+      - run_rspec
+ 
+workflows:
+  version: 2
+  build_and_test:    
+    jobs:            
+      - initializing        
+      - lintering:        
+          requires:  
+            - initializing
+      - testing:
+          requires:
+            - initializing
+            - lintering

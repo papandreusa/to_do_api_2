@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      run: rubocop
+    DatabaseConsistency:
+      run: database_consistency
+    Audit:
+      run: bundle-audit
+    Brakeman:
+      run: brakeman
+    Fasterer:
+      run: fasterer

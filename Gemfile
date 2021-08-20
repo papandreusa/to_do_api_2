@@ -39,6 +39,11 @@ end
 
 group :development do
   gem 'awesome_print', '~> 1.9'
+  gem 'brakeman', '~> 5.0'
+  gem 'bundle-audit', '~> 0.1'
+  gem 'database_consistency', '~> 0.8', require: false
+  gem 'fasterer', '~> 0.9'
+  gem 'lefthook', '~> 0.7'
   gem 'listen', '~> 3.3'
   gem 'spring', '~> 2.1'
 end
@@ -47,6 +52,7 @@ group :test do
   gem 'database_cleaner', '~> 2.0'
   gem 'dox', '~> 1.3', require: false
   gem 'json_matchers'
+  gem 'shoulda-matchers', '~> 4.5'
   gem 'simplecov', '~> 0.21'
 end
 

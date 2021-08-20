@@ -41,7 +41,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
         post api_v1_projects_path, params: valid_params, headers: headers
       end
 
-      it { expect(response).to have_http_status(:unauthorized)}
+      it { expect(response).to have_http_status(:unauthorized) }
     end
   end
 end
