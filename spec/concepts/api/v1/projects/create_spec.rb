@@ -1,5 +1,6 @@
 RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
   include Docs::V1::Projects::Api
+  include Docs::V1::Projects::Create
 
   let(:name) { FFaker::Lorem.word }
   let(:valid_params) { { name: name }.to_json }
@@ -7,7 +8,6 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
   let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
-    include Docs::V1::Projects::Create
     before do
       post api_v1_projects_path, params: valid_params, headers: headers.merge(authenticated_header(user))
     end
@@ -21,7 +21,6 @@ RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
   end
 
   describe 'fail result' do
-    include Docs::V1::Projects::Create
     context 'when post invalid params' do
       let(:invalid_params) { { name: nil }.to_json }
 

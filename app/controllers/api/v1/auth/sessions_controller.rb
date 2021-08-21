@@ -1,4 +1,4 @@
-class Api::V1::SessionsController < ApplicationController
+class Api::V1::Auth::SessionsController < ApplicationController
   include Api::V1::Endpoint
   include Api::V1::Sessions
 

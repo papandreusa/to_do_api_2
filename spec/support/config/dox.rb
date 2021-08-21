@@ -1,6 +1,8 @@
 require 'dox'
 Dox.configure do |config|
   config.headers_whitelist = ['Content-Type']
+  config.header_file_path = Rails.root.join('spec/docs/v1/descriptions/header.md')
+  config.desc_folder_path = Rails.root.join('spec/docs/v1/descriptions')
 end
 
 RSpec.configure do |config|

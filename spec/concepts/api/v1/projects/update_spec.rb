@@ -25,7 +25,7 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
   describe 'fail result' do
     context 'when unauthenticated' do
       before do
-        put api_v1_project_path(project), params: valid_params, headers: headers
+        patch api_v1_project_path(project), params: valid_params, headers: headers
       end
 
       it 'responses with status ' do
@@ -37,12 +37,12 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
       let(:invalid_params) { { name: nil }.to_json }
 
       before do
-        put api_v1_project_path(project),
-            params: invalid_params,
-            headers: headers.merge(authenticated_header(project.user))
+        patch api_v1_project_path(project),
+              params: invalid_params,
+              headers: headers.merge(authenticated_header(project.user))
       end
 
-      it 'posts invalid params' do
+      it 'posts invalid params', :dox do
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
@@ -53,9 +53,9 @@ RSpec.describe 'Api::V1::Projects::Operations::Update', type: :request do
       let(:invalid_id) { :invalid_id }
 
       before do
-        put api_v1_project_path(invalid_id),
-            params: valid_params,
-            headers: authenticated_header(project.user)
+        patch api_v1_project_path(invalid_id),
+              params: valid_params,
+              headers: authenticated_header(project.user)
       end
 
       it 'puts project with invalid id', :dox do

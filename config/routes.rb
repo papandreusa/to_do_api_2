@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :projects
+      resources :projects, defaults: { format: :json }
 
-      resources :users, only: %i[create index]
-      post :sessions, controller: :sessions, action: :create
-      delete :sessions, controller: :sessions, action: :destroy
-      # resources :sessions, only: %i[create destroy]
-      post :refresh, controller: :refresh, action: :create
+      post :auth, controller: :users, action: :create, defaults: { format: :json }
+      namespace :auth do
+        post :sign_in, controller: :sessions, action: :create, defaults: { format: :json }
+        delete :sign_out, controller: :sessions, action: :destroy, defaults: { format: :json }
+      end
     end
   end
 end

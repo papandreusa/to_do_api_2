@@ -16,7 +16,7 @@ namespace :api do
 
     task html: :environment do
       puts 'html task'
-      system("aglio -i #{md_file} -o #{html_file}")
+      system("bundle exec aglio -i #{md_file} -o #{html_file}")
     end
 
     task docs: ['api:v1:md', 'api:v1:html']
