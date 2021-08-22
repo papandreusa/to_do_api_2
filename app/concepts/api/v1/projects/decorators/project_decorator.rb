@@ -3,7 +3,7 @@ class Api::V1::Projects::Decorators::ProjectDecorator < Api::V1::Lib::Decorators
 
   class << self
     def collection_url(params)
-      h.polymorphic_path(%i[api v1 projects], **permitted_params(params))
+      h.api_v1_projects_path(**permitted_params(params))
     end
 
     def permitted_params(params)

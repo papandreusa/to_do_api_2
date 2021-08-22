@@ -9,7 +9,7 @@ class Api::V1::Projects::Operations::Destroy < Api::V1::Lib::Operations::BaseOpe
   private
 
   def assign_model!(options, params:, **)
-    options[:model] = options[:current_user].projects.find_by(id: params[:id])
+    options[:model] = Project.find_by(id: params[:id])
   end
 
   def destroy_model!(options, **)

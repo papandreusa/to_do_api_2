@@ -3,21 +3,14 @@ class Api::V1::Projects::Policies::ProjectPolicy < ::ApplicationPolicy
     true
   end
 
-  def show?
-    record.user == user
+  def manage?
+    record.user_id == user.id
   end
 
-  def create?
-    true
-  end
-
-  def update?
-    show?
-  end
-
-  def destroy?
-    show?
-  end
+  alias show? manage?
+  alias create? manage?
+  alias update? manage?
+  alias destroy? manage?
 
   class Scope < ::ApplicationPolicy::Scope
     def resolve

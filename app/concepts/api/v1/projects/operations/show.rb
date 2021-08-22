@@ -9,7 +9,7 @@ class Api::V1::Projects::Operations::Show < Api::V1::Lib::Operations::BaseOperat
   private
 
   def assign_model!(options, params:, **)
-    options[:model] = options[:current_user].projects.find_by(id: params[:id])
+    options[:model] = Project.find_by(id: params[:id])
   end
 
   def assign_data(options, **)

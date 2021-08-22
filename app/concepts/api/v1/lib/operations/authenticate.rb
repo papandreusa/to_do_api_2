@@ -1,15 +1,9 @@
-class Api::V1::Lib::Operations::Authenticate < Trailblazer::Operation
+class Api::V1::Lib::Operations::Authenticate < Api::V1::Lib::Operations::BaseOperation
   include ::JWTSessions::RailsAuthorization
   include ::Pundit
 
-  pass :setup
   step :authorize_request!
   step :set_current_user!
-
-  def setup(_options, params:, request:, **)
-    @params = params
-    @request = request
-  end
 
   def authorize_request!(options, **)
     authorize_access_request!
@@ -22,8 +16,4 @@ class Api::V1::Lib::Operations::Authenticate < Trailblazer::Operation
   def set_current_user!(options, **)
     options[:current_user] = User.find(payload['user_id'])
   end
-
-  private
-
-  attr_reader :params, :request
 end

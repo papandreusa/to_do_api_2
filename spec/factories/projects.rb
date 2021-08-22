@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :project do
-    name { FFaker::Lorem.word }
+    sequence(:name) { |n| "project ##{n}" }
     user
   end
 end

@@ -3,7 +3,7 @@ class Api::V1::Projects::Operations::Update < Api::V1::Lib::Operations::BaseOper
 
   step Subprocess(Api::V1::Lib::Operations::Authenticate)
   step :assign_model!
-  step Policy::Pundit(Policies::ProjectPolicy, :update?), name: :project_policy
+  step Policy::Pundit(Policies::ProjectPolicy, :update?)
   step :assign_contract!
   step Subprocess(Api::V1::Lib::Operations::SaveAfterValidation)
   pass :assign_data
@@ -11,7 +11,7 @@ class Api::V1::Projects::Operations::Update < Api::V1::Lib::Operations::BaseOper
   private
 
   def assign_model!(options, params:, **)
-    options[:model] = options[:current_user].projects.find_by(id: params[:id])
+    options[:model] = Project.find_by(id: params[:id])
   end
 
   def assign_contract!(options, **)
