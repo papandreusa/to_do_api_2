@@ -1,27 +1,21 @@
 class Api::V1::Projects::Operations::Create < Api::V1::Lib::Operations::BaseOperation
   include Api::V1::Projects
 
-  step :model!
+  step Subprocess(Api::V1::Lib::Operations::Authenticate)
+  step :assign_model!
   step Policy::Pundit(Policies::ProjectPolicy, :create?), name: :project_policy
   step :assign_contract!
-  step :validate!
-  step :save_model!
+  step Subprocess(Api::V1::Lib::Operations::SaveAfterValidation)
   pass :assign_data
 
-  def model!(options, **)
+  private
+
+  def assign_model!(options, **)
     options[:model] = options[:current_user].projects.new
   end
 
   def assign_contract!(options, **)
     options[:contract] = Contracts::Create.new(options[:model])
-  end
-
-  def validate!(options, params:, **)
-    options[:contract].validate(params)
-  end
-
-  def save_model!(options, params:, **)
-    options[:contract].save(params)
   end
 
   def assign_data(options, **)

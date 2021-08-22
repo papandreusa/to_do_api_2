@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Projects::Operations::Destroy', type: :request do
+RSpec.describe 'Delete Project', type: :request do
   include Docs::V1::Projects::Api
   include Docs::V1::Projects::Destroy
 

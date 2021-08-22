@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Projects::Operations::Index', type: :request do
+RSpec.describe 'GET Projects', type: :request do
   include Docs::V1::Projects::Api
   include Docs::V1::Projects::Index
 

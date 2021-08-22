@@ -1,6 +1,6 @@
 class Api::V1::Projects::Serializers::ProjectSerializer < Api::V1::Lib::Serializers::BaseSerializer
   set_type :project
-  set_id :user_id
+  set_id :id
   attributes :name
   belongs_to :user, serializer: Api::V1::Users::Serializers::UserSerializer
 

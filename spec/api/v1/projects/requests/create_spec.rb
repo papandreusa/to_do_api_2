@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Projects::Operations::Create', type: :request do
+RSpec.describe 'Create Project', type: :request do
   include Docs::V1::Projects::Api
   include Docs::V1::Projects::Create
 

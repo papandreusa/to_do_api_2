@@ -1,13 +1,13 @@
 class Api::V1::Users::Operations::Create < Trailblazer::Operation
   include Api::V1::Users
 
-  step :model!
+  step :assign_model!
   step :assign_contract!
   step :validate!
   step :save_model!
   step Subprocess(Api::V1::Sessions::Operations::Create)
 
-  def model!(options, **)
+  def assign_model!(options, **)
     options[:model] = User.new
   end
 

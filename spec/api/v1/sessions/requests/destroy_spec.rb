@@ -1,10 +1,8 @@
-RSpec.describe 'Api::V1::Sessions::Opeartion::Destroy', type: :request do
+RSpec.describe 'Sign Out', type: :request do
   include Docs::V1::Sessions::Api
   include Docs::V1::Sessions::Destroy
 
   let!(:user) { create(:user) }
-  let(:username) { user.username }
-  let(:password) { user.password }
   let!(:headers) { { 'CONTENT_TYPE' => 'application/json' }.merge(authenticated_header(user)) }
 
   describe 'DELETE #destroy' do

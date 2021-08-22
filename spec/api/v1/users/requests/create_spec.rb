@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Users::Opeartion::Create', type: :request do
+RSpec.describe 'Registration', type: :request do
   include Docs::V1::Users::Api
   include Docs::V1::Users::Create
 

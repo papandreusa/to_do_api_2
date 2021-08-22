@@ -1,16 +1,15 @@
-class Api::V1::Projects::Operations::Index < ::Api::V1::Lib::Operations::BaseOperation
+class Api::V1::Projects::Operations::Index < Api::V1::Lib::Operations::BaseOperation
   include Api::V1::Projects
   include Pagy::Backend
 
+  step Subprocess(Api::V1::Lib::Operations::Authenticate)
   step Policy::Pundit(Policies::ProjectPolicy, :index?)
-  step :index!
+  step :assign_collection!
   pass :assign_data
 
   private
 
-  attr_reader :model, :params
-
-  def index!(options, **)
+  def assign_collection!(options, current_user:, **)
     options[:model] = Project.new
     options[:pagy], options[:collection] = pagy(Policies::ProjectPolicy::Scope.new(current_user, Project).resolve)
   end

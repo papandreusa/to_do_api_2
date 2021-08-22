@@ -1,4 +1,4 @@
-RSpec.describe 'Api::V1::Sessions::Opeartion::Create', type: :request do
+RSpec.describe 'Sing In', type: :request do
   include Docs::V1::Sessions::Api
   include Docs::V1::Sessions::Create
 
