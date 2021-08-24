@@ -7,7 +7,7 @@ class Api::V1::Projects::Decorators::ProjectDecorator < Api::V1::Lib::Decorators
     end
 
     def permitted_params(params)
-      params.permit(%i[sort page limit])
+      params.permit(%i[sort page limit items after before])
     end
   end
 

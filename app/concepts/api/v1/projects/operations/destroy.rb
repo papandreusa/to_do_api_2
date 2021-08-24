@@ -1,18 +1,13 @@
-class Api::V1::Projects::Operations::Destroy < Api::V1::Lib::Operations::BaseOperation
+class Api::V1::Projects::Operations::Destroy < Trailblazer::Operation
   include Api::V1::Projects
 
-  step Subprocess(Api::V1::Lib::Operations::Authenticate)
-  step :assign_model!
+  step Model(Project, :find_by)
   step Policy::Pundit(Policies::ProjectPolicy, :destroy?)
   step :destroy_model!
 
   private
 
-  def assign_model!(options, params:, **)
-    options[:model] = Project.find_by(id: params[:id])
-  end
-
-  def destroy_model!(options, **)
-    options[:model].destroy
+  def destroy_model!(ctx, **)
+    ctx[:model].destroy
   end
 end

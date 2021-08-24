@@ -1,97 +1,131 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema",
   "type": "object",
-  "properties": {
-    "data": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "attributes": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "name"
-              ]
-            },
-            "relationships": {
-              "type": "object",
-              "properties": {
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "type": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "type"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "data"
-                  ]
-                }
-              },
-              "required": [
-                "user"
-              ]
-            },
-            "links": {
-              "type": "object",
-              "properties": {
-                "self": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "self"
-              ]
-            }
-          },
-          "required": [
-            "id",
-            "type",
-            "attributes",
-            "relationships",
-            "links"
-          ]
-        }
-      ]
-    },
-    "links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "self"
-      ]
-    }
-  },
   "required": [
-    "data",
-    "links"
-  ]
+      "data"
+  ],
+  "properties": {
+      "data": {
+          "type": "array",
+          "additionalItems": false,
+          "items": {
+              "anyOf": [
+                  {
+                      "type": "object",
+                      "required": [
+                          "id",
+                          "type",
+                          "attributes",
+                          "relationships",
+                          "links"
+                      ],
+                      "properties": {
+                          "id": {
+                              "type": "string"
+                          },
+                          "type": {
+                              "type": "string"
+                          },
+                          "attributes": {
+                              "type": "object",
+                              "required": [
+                                  "name"
+                              ],
+                              "properties": {
+                                  "name": {
+                                      "type": "string"
+                                  }
+                              },
+                              "additionalProperties": true
+                          },
+                          "relationships": {
+                              "type": "object",
+                              "required": [
+                                  "user"
+                              ],
+                              "properties": {
+                                  "user": {
+                                      "type": "object",
+                                      "required": [
+                                          "data"
+                                      ],
+                                      "properties": {
+                                          "data": {
+                                              "type": "object",
+                                              "required": [
+                                                  "id",
+                                                  "type"
+                                              ],
+                                              "properties": {
+                                                  "id": {
+                                                      "type": "string"
+                                                  },
+                                                  "type": {
+                                                      "type": "string"
+                                                  }
+                                              },
+                                              "additionalProperties": true
+                                          }
+                                      },
+                                      "additionalProperties": true
+                                  }
+                              },
+                              "additionalProperties": true
+                          },
+                          "links": {
+                              "type": "object",
+                              "required": [
+                                  "self"
+                              ],
+                              "properties": {
+                                  "self": {
+                                      "type": "string"
+                                  }
+                              },
+                              "additionalProperties": true
+                          }
+                      },
+                      "additionalProperties": true
+                  }
+              ]
+          }
+      },
+      "meta": {
+          "type": "object",
+          "required": [
+              "page"
+          ],
+          "properties": {
+              "page": {
+                  "type": "object",
+                  "required": [
+                      "page",
+                      "limit",
+                      "pages",
+                      "total"
+                  ],
+                  "properties": {
+                      "page": {
+                          "type": "integer"
+                      },
+                      "limit": {
+                          "type": "integer"
+                      },
+                      "pages": {
+                          "type": "integer"
+                      },
+                      "total": {
+                          "type": "integer"
+                      }
+                  },
+                  "additionalProperties": true
+              }
+          },
+          "additionalProperties": true
+      },
+      "links": {
+          "type": "string"
+      }
+  },
+  "additionalProperties": true
 }

@@ -1,13 +1,10 @@
-class Api::V1::Sessions::Operations::Destroy < Api::V1::Lib::Operations::Authenticate
+class Api::V1::Sessions::Operations::Destroy < Trailblazer::Operation
   step :flush_session!
-  pass :set_message
 
-  def flush_session!(_options, **)
-    session = JWTSessions::Session.new(payload: payload)
+  private
+
+  def flush_session!(_ctx, payload:, **)
+    session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
     session.flush_by_access_payload
-  end
-
-  def set_message(options, **)
-    options[:data] = :signed_out
   end
 end

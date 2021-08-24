@@ -1,25 +1,17 @@
-class Api::V1::Projects::Operations::Update < Api::V1::Lib::Operations::BaseOperation
+class Api::V1::Projects::Operations::Update < Trailblazer::Operation
   include Api::V1::Projects
 
-  step Subprocess(Api::V1::Lib::Operations::Authenticate)
-  step :assign_model!
+  step Model(Project, :find_by)
   step Policy::Pundit(Policies::ProjectPolicy, :update?)
-  step :assign_contract!
-  step Subprocess(Api::V1::Lib::Operations::SaveAfterValidation)
+  step Contract::Build(constant: Contracts::Update)
+  step Contract::Validate()
+  step Contract::Persist()
   pass :assign_data
 
   private
 
-  def assign_model!(options, params:, **)
-    options[:model] = Project.find_by(id: params[:id])
-  end
-
-  def assign_contract!(options, **)
-    options[:contract] = Contracts::Update.new(options[:model])
-  end
-
-  def assign_data(options, **)
-    options[:data] = Serializers::ProjectSerializer.new(options[:model])
-    options[:status] = :ok
+  def assign_data(ctx, **)
+    ctx[:data] = Serializers::ProjectSerializer.new(ctx[:model])
+    ctx[:status] = :ok
   end
 end

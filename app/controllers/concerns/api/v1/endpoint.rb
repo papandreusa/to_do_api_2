@@ -5,7 +5,7 @@ module Api::V1::Endpoint
   private
 
   def endpoint_options
-    { params: params, request: request }
+    { params: params }
   end
 
   def default_cases
@@ -55,7 +55,7 @@ module Api::V1::Endpoint
   end
 
   def unprocessable_entity_case?(result)
-    result.failure? and result[:contract]&.errors.present?
+    result.failure? and result['contract.default']&.errors.present?
   end
 
   def success_handler(result)
@@ -83,7 +83,8 @@ module Api::V1::Endpoint
   end
 
   def unprocessable_entity_handler(result)
-    render json: Serializers::ErrorSerializer.new(result[:contract].errors).serialize, status: :unprocessable_entity
+    render json: Serializers::ErrorSerializer.new(result['contract.default'].errors).serialize,
+           status: :unprocessable_entity
   end
 
   def bad_request_handler(_)

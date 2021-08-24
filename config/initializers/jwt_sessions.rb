@@ -4,7 +4,7 @@ JWTSessions.token_store = :redis, {
   redis_db_name: '0',
   token_prefix: 'jwt_'
 }
-JWTSessions.access_exp_time = 3600
+JWTSessions.access_exp_time = 86_400
 JWTSessions.refresh_exp_time = 604_800
 JWTSessions.access_header = 'Authorization'
 JWTSessions.algorithm = 'HS256'
