@@ -2,12 +2,12 @@ class Api::V1::Projects::Decorators::ProjectDecorator < Api::V1::Lib::Decorators
   delegate :name
 
   class << self
-    def collection_url(params)
+    def collection_url(**params)
       h.api_v1_projects_path(**permitted_params(params))
     end
 
     def permitted_params(params)
-      params.permit(%i[sort page limit items after before])
+      params.slice(*%i[sort page limit items after before])
     end
   end
 

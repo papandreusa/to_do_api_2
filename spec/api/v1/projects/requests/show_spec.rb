@@ -31,6 +31,18 @@ RSpec.describe 'GET Project', type: :request do
       end
     end
 
+    context 'when accesses project of other user' do
+      let(:project2) { create(:project) }
+
+      before do
+        get api_v1_project_path(project2), headers: authenticated_header(user)
+      end
+
+      it 'gets project of ohter user', :dox do
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
     context 'when unauthenticated' do
       before do
         get api_v1_project_path(project)

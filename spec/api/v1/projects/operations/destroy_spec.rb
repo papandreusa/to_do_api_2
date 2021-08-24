@@ -13,7 +13,7 @@ RSpec.describe Api::V1::Projects::Operations::Destroy, type: :operations do
 
   describe 'failure ' do
     context 'when project not found' do
-      let(:invalid_params) { { id: -1 } }
+      let(:invalid_params) { { id: :invalid_id } }
 
       it { expect(described_class.call(params: invalid_params, current_user: user)).to be_failure }
     end

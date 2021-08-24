@@ -52,6 +52,7 @@ group :test do
   gem 'database_cleaner', '~> 2.0'
   gem 'dox', '~> 1.3', require: false
   gem 'json_matchers'
+  gem 'pundit-matchers', '~> 1.6.0'
   gem 'shoulda-matchers', '~> 4.5'
   gem 'simplecov', '~> 0.21'
 end

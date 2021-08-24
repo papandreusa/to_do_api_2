@@ -13,7 +13,6 @@ module Api::V1::Endpoint
       created: ->(result) { created_case?(result) },
       deleted: ->(result) { deleted_case?(result) },
       success: ->(result) { result.success? },
-      unauthorized: ->(result) { unauthorized_case?(result) },
       forbidden: ->(result) { forbidden_case?(result) },
       not_found: ->(result) { not_found_case?(result) },
       unprocessable_entity: ->(result) { unprocessable_entity_case?(result) },
@@ -26,7 +25,6 @@ module Api::V1::Endpoint
       success: ->(result, **) { success_handler(result) },
       created: ->(result, **) { created_handler(result) },
       deleted: ->(result, **) { deleted_handler(result) },
-      unauthorized: ->(result, **) { unautherized_handler(result) },
       forbidden: ->(result, **) { forbidden_handler(result) },
       not_found: ->(result, **) { not_found_handler(result) },
       unprocessable_entity: ->(result, **) { unprocessable_entity_handler(result) },
@@ -40,10 +38,6 @@ module Api::V1::Endpoint
 
   def deleted_case?(result)
     result.success? and result[:params][:action].to_sym == :destroy
-  end
-
-  def unauthorized_case?(result)
-    result.failure? and result[:status] == :unauthorized
   end
 
   def forbidden_case?(result)
@@ -63,23 +57,19 @@ module Api::V1::Endpoint
   end
 
   def created_handler(result)
-    render json:  result[:data], status: :created
+    render json: result[:data], status: :created
   end
 
-  def deleted_handler(result)
-    render json:  result[:data], status: :no_content
-  end
-
-  def unautherized_handler(_)
-    render  I18n.t(:unauthorized, scope: :statuses), status: :unauthorized
+  def deleted_handler(_result)
+    render status: :no_content
   end
 
   def forbidden_handler(_)
-    render  I18n.t(:forbidden, scope: :statuses), status: :forbidden
+    render status: :forbidden
   end
 
   def not_found_handler(_)
-    render I18n.t(:not_found, scope: :statuses), status: :not_found
+    render status: :not_found
   end
 
   def unprocessable_entity_handler(result)
@@ -88,6 +78,6 @@ module Api::V1::Endpoint
   end
 
   def bad_request_handler(_)
-    render I18n.t(:bad_request, scope: :statuses), status: :bad_request
+    render status: :bad_request
   end
 end

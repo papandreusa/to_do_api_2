@@ -10,13 +10,8 @@ class Api::V1::Projects::Serializers::ProjectSerializer < Api::V1::Lib::Serializ
     Decorators::ProjectDecorator.new(object).public_url
   end
 
-  def initialize(resource, options = {})
-    options.empty? ? super : super(resource, collection_options(params: options[:params], pagy: options[:pagy]))
-  end
-
-  def collection_options(params:, pagy:)
-    options = {}
-    options[:links] = Decorators::ProjectDecorator.collection_url(params) if params
+  def collection_options(pagy:, params: {})
+    options = { links: Decorators::ProjectDecorator.collection_url(**params) }
     options[:meta] = { page: { page: pagy.page, limit: pagy.items, pages: pagy.pages, total: pagy.count } } if pagy
     options
   end

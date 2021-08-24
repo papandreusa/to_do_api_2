@@ -5,11 +5,10 @@ RSpec.describe 'Create Project', type: :request do
   let(:name) { FFaker::Lorem.word }
   let(:valid_params) { { name: name }.to_json }
   let!(:user) { create(:user) }
-  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
     before do
-      post api_v1_projects_path, params: valid_params, headers: headers.merge(authenticated_header(user))
+      post api_v1_projects_path, params: valid_params, headers: authenticated_header(user)
     end
 
     it 'posts valid params', :dox do
@@ -25,7 +24,7 @@ RSpec.describe 'Create Project', type: :request do
       let(:invalid_params) { { name: nil }.to_json }
 
       before do
-        post api_v1_projects_path, params: invalid_params, headers: headers.merge(authenticated_header(user))
+        post api_v1_projects_path, params: invalid_params, headers: authenticated_header(user)
       end
 
       it 'posts invalid params', :dox do

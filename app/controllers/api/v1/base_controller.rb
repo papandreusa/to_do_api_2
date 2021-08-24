@@ -7,6 +7,6 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def endpoint_options
-    { params: params, current_user: current_user }
+    { params: params.to_unsafe_h, current_user: current_user }
   end
 end

@@ -5,13 +5,12 @@ RSpec.describe 'Patch Project', type: :request do
   let(:name) { FFaker::Lorem.word }
   let(:valid_params) { { name: name }.to_json }
   let!(:project) { create(:project, user: create(:user)) }
-  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
 
   describe 'Success result' do
     before do
       put api_v1_project_path(project),
           params: valid_params,
-          headers: headers.merge(authenticated_header(project.user))
+          headers: authenticated_header(project.user)
     end
 
     it 'puts valid params', :dox do
@@ -39,7 +38,7 @@ RSpec.describe 'Patch Project', type: :request do
       before do
         patch api_v1_project_path(project),
               params: invalid_params,
-              headers: headers.merge(authenticated_header(project.user))
+              headers: authenticated_header(project.user)
       end
 
       it 'posts invalid params', :dox do
@@ -60,6 +59,20 @@ RSpec.describe 'Patch Project', type: :request do
 
       it 'puts project with invalid id', :dox do
         expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when accesses project of other user' do
+      let(:project2) { create(:project) }
+
+      before do
+        patch api_v1_project_path(project2),
+              params: valid_params,
+              headers: authenticated_header(project.user)
+      end
+
+      it 'gets project of ohter user', :dox do
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

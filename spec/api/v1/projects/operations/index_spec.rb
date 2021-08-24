@@ -1,6 +1,6 @@
 RSpec.describe Api::V1::Projects::Operations::Index, type: :operations do
   let!(:user) { create(:user) }
-  let(:params) { ActionController::Parameters.new({}) }
+  let(:params) { {} }
 
   before { create_list(:project, 2, user: user) }
 
