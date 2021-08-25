@@ -11,6 +11,7 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 /coverage/*
+/coverage
 
 /storage/*
 !/storage/.keep
