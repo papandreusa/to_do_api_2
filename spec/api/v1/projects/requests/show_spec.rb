@@ -11,11 +11,10 @@ RSpec.describe 'GET Project', type: :request do
     end
 
     it 'gets project', :dox do
-      expect(response).to have_http_status(:ok)
+      expect(response)
+        .to have_http_status(:ok)
+        .and match_json_schema('v1/projects/instance')
     end
-
-    it { expect(response).to match_json_schema('v1/projects/project') }
-    it { expect(JSON.parse(response.body)['data']['attributes']['name']).to eql project.name }
   end
 
   describe 'fail result' do

@@ -5,6 +5,6 @@ RSpec.describe Api::V1::Projects::Serializers::ProjectSerializer, type: :seriali
 
   before { create_list(:project, 2) }
 
-  it { expect(serializer.to_json).to match_json_schema('v1/projects/project') }
-  it { expect(described_class.new(Project.all).to_json).to match_json_schema('v1/projects/projects') }
+  it { expect(serializer.to_json).to match_json_schema('v1/projects/instance') }
+  it { expect(described_class.new(Project.all).to_json).to match_json_schema('v1/projects/collection') }
 end

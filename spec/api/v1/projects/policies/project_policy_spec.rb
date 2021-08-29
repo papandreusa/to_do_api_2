@@ -2,18 +2,36 @@ RSpec.describe Api::V1::Projects::Policies::ProjectPolicy, type: :policy do
   subject { described_class.new(user, project) }
 
   let(:user) { create(:user) }
+  let(:project) { create(:project, user: user) }
 
-  context 'when user is owner of project' do
-    let(:project) { create(:project, user: user) }
+  describe '#index?' do
+    context 'when user is authenticated' do
+      it { is_expected.to permit_action(:index) }
+    end
 
-    it { is_expected.to permit_actions(%i[index show create update destroy]) }
-    it { expect(described_class::Scope.new(user, Project.all).resolve).to include(project) }
+    context 'when user is unauthenticated' do
+      let(:user) { nil }
+      let(:project) { create(:project) }
+
+      it { is_expected.not_to permit_action(:index) }
+    end
   end
 
-  context 'when user is not owner of project' do
-    let(:project) { create(:project) }
+  %i[show create update destroy].each do |action|
+    describe "##{action}?" do
+      context 'when user is owner of project' do
+        it { is_expected.to permit_action(action) }
+      end
 
-    it { is_expected.not_to permit_actions(%i[index show create update destroy]) }
-    it { expect(described_class::Scope.new(user, Project.all).resolve).not_to include(project) }
+      context 'when user is not owner of project' do
+        let(:project) { create(:project) }
+
+        it { is_expected.not_to permit_action(action) }
+      end
+    end
+  end
+
+  context 'when user is owner of project' do
+    it { expect(described_class::Scope.new(user, Project.all).resolve).to include(project) }
   end
 end

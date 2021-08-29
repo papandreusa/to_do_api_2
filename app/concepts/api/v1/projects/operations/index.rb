@@ -2,11 +2,16 @@ class Api::V1::Projects::Operations::Index < Trailblazer::Operation
   include Api::V1::Projects
 
   step Model(Project, :new)
+  step :assign_user!
   step Policy::Pundit(Policies::ProjectPolicy, :index?)
   step :assign_collection!
   pass :assign_data
 
   private
+
+  def assign_user!(ctx, current_user:, **)
+    ctx[:model].user = current_user
+  end
 
   def assign_collection!(ctx, current_user:, params:, **)
     ctx[:pagy], ctx[:collection] =

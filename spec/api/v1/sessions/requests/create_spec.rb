@@ -13,10 +13,10 @@ RSpec.describe 'Sing In', type: :request do
       end
 
       it 'sign in with valid params', :dox do
-        expect(response).to have_http_status(:created)
+        expect(response)
+          .to have_http_status(:created)
+          .and match_json_schema('v1/sessions/create')
       end
-
-      it { expect(response).to match_json_schema('v1/sessions/create') }
     end
 
     context 'when invalid params' do

@@ -6,8 +6,8 @@ class Api::V1::Projects::Serializers::ProjectSerializer < Api::V1::Lib::Serializ
   attributes :name
   belongs_to :user, serializer: Api::V1::Users::Serializers::UserSerializer
 
-  link :self do |object|
-    Decorators::ProjectDecorator.new(object).public_url
+  link :self do |project|
+    Decorators::ProjectDecorator.instance_url(project)
   end
 
   def collection_options(pagy:, params: {})

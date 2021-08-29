@@ -14,8 +14,6 @@ RSpec.describe 'Delete Project', type: :request do
     it 'deletes project', :dox do
       expect(response).to have_http_status(:no_content)
     end
-
-    it { expect(Project.find_by(id: project.id)).to be_nil }
   end
 
   describe 'fail result' do

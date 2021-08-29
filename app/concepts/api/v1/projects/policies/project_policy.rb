@@ -1,6 +1,6 @@
 class Api::V1::Projects::Policies::ProjectPolicy < ::ApplicationPolicy
   def index?
-    true
+    user.present?
   end
 
   def manage?
