@@ -33,9 +33,9 @@ RSpec.describe 'Registration', type: :request do
     end
 
     it 'register user with invalid params', :dox do
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response)
+        .to have_http_status(:unprocessable_entity)
+        .and match_json_schema('v1/base/errors')
     end
-
-    it { expect(response).to match_json_schema('v1/base/errors') }
   end
 end

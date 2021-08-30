@@ -8,4 +8,10 @@ en:
     not_found: Record not Found
     unprocessable_entity: Validation Errors
     bad_request: 'Something went wrong :('
+  errors:
+    be_filled: must be filled
+    be_unique: must be unique
+    ivalid_format: has invalid format
+    the_same_as: must be same as %{field}
+    not_less: size cannot be less than %{number}
     

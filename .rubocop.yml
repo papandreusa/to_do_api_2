@@ -63,3 +63,9 @@ Naming/InclusiveLanguage:
 Metrics/ParameterLists:
   Exclude:
     - 'config/initializers/simple_endpoint.rb'
+
+RSpec/ExampleLength:
+  Max: 8
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented

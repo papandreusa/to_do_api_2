@@ -1,5 +1,5 @@
 # TO DO API
-## [ Base URL: /api/v1 ]
+### [ Base URL: /api/v1 ]
 
 # Group Authentication
 
@@ -21,8 +21,8 @@
     + Body
 
             {
-              "username": "user11",
-              "password": "r7h0KfccbM"
+              "username": "user19",
+              "password": "4zbgzJwXQ"
             }
 
 + Response 201
@@ -34,11 +34,11 @@
     + Body
 
             {
-              "csrf": "KG9OLpaSsAhUsGpNFcegHLQGyIsMUI+qRz3srdqcY1saxZ3iSOPAz6IalnpQnOlorOwCsqePY7+71uSOFgBeIA==",
-              "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjk1NTA1NDgsInVzZXJfaWQiOjEsInVpZCI6ImJhNjA3YmI0LWU0NWEtNDI2Yi04YWQ5LTA2MWNmOWJhYmFjMyIsInJ1aWQiOiIzYjNiOTFiYy05ZjIzLTQwMzUtODlmYS1kODZiMTllNWRlY2MifQ.VdMF7VnaFfrwtw8QGmaLlRLjZZdD_Qp9fA5Yutai2ss",
-              "access_expires_at": "2021-08-21T15:55:48.000+03:00",
-              "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzAxNTE3NDgsInVpZCI6IjNiM2I5MWJjLTlmMjMtNDAzNS04OWZhLWQ4NmIxOWU1ZGVjYyJ9.jBA0fpbysMb1gT-8lNJ4DVLJ-AHAQXQLDsGoqTpZUzQ",
-              "refresh_expires_at": "2021-08-28T14:55:48.000+03:00"
+              "csrf": "d333YLLovB854WbAM/SoP2N6CuZVJsI4yloXUKan6qHLqzeuzwN3NyAXNvB+/75Xh3/Vlg8gSwg49YuSFr7Uvg==",
+              "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzAzODY4NTAsInVzZXJfaWQiOjEsInVpZCI6ImYwMDY0NDliLTE3MzQtNDBhOS04NWE1LTE2MjFmMzc0NjBkNyIsInJ1aWQiOiJjMmVjZDc5Zi1lZWYxLTRhM2MtODBlNC02MWM3M2FiMjk5YmYifQ.Ggidnjsz6MGQKQs0Ah5793BlSlE0PmLlaCMVRq9AjGs",
+              "access_expires_at": "2021-08-31T08:14:10.000+03:00",
+              "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzA5MDUyNTAsInVpZCI6ImMyZWNkNzlmLWVlZjEtNGEzYy04MGU0LTYxYzczYWIyOTliZiJ9.7ehi913Bw-t5yoxt-wEvqiIdmPwVEwNIiXdaOHqD5EQ",
+              "refresh_expires_at": "2021-09-06T08:14:10.000+03:00"
             }
 
 + Request sign in with invalid params
@@ -52,7 +52,7 @@
     + Body
 
             {
-              "username": "user12",
+              "username": "user20",
               "password": "inValid pAssword"
             }
 
@@ -91,7 +91,7 @@
 
     + Body
 
-            username=user14&password=NkjR43oL&password_confirmation=NkjR43oL
+            username=user22&password=XxOSe6P5&password_confirmation=XxOSe6P5
 
 + Response 201
 
@@ -102,11 +102,11 @@
     + Body
 
             {
-              "csrf": "4+LcgPbnLF8v1TmuyBc+6COMQVTiG/ebLOALmEFh1Qm6stkjmRaAiELkbUcXQt/3r5LhWP4W+EVbBwoCivrf6g==",
-              "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjk1NTA1NTAsInVzZXJfaWQiOjEsInVpZCI6ImU5YjYzZTVlLWIzZTYtNGM3OC04MzY0LWYyMmY5NTIxNTc1NyIsInJ1aWQiOiIwZWY4M2FiNy0yZTlmLTRkMzctYTRiYS1lNDcyYjNjMTM5MzcifQ.bYA29g9_LlM0lr_jkTElJEIkL7fRXEDmXJP3iqDPC28",
-              "access_expires_at": "2021-08-21T15:55:50.000+03:00",
-              "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzAxNTE3NTAsInVpZCI6IjBlZjgzYWI3LTJlOWYtNGQzNy1hNGJhLWU0NzJiM2MxMzkzNyJ9.erE7yuYMxIrAPqwjy7VImKqMx8eZUxkpAmBWGWdI1_I",
-              "refresh_expires_at": "2021-08-28T14:55:50.000+03:00"
+              "csrf": "dSfSAu+LEZoemyuIROQPX4wD2STn/xQAfArNaVlBbSIyqcNTjktS8lebxXOZJxenMXoRFYKf9q58dHEtHRou3Q==",
+              "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzAzODY4NTEsInVzZXJfaWQiOjEsInVpZCI6IjlhMzRmMjA4LThhMmEtNGFjOS1hODVhLTU3Nzk5YjhhNDNlMSIsInJ1aWQiOiJkNTNiZjYxMS0xODRmLTRlNTYtOTMyOC01NzdiM2ZjZGJlMzMifQ.a18T68PCb08aOBKrYDvk5eZ0F_B4iByL5nGAsFE4JNM",
+              "access_expires_at": "2021-08-31T08:14:11.000+03:00",
+              "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzA5MDUyNTEsInVpZCI6ImQ1M2JmNjExLTE4NGYtNGU1Ni05MzI4LTU3N2IzZmNkYmUzMyJ9.FP9K-kpwxezJ7Fk54W62dVJjhJXp2mxdVDE3n05YSKw",
+              "refresh_expires_at": "2021-09-06T08:14:11.000+03:00"
             }
 
 + Request register user with invalid params
@@ -119,7 +119,7 @@
 
     + Body
 
-            username=porro&password=Inv%40lid+P%40%24%24w0rd&password_confirmation=inValid+pAssword
+            username=alias&password=Inv%40lid+P%40%24%24w0rd&password_confirmation=inValid+pAssword
 
 + Response 422
 
@@ -162,7 +162,7 @@
     + Body
 
             {
-              "name": "nostrum"
+              "name": "porro"
             }
 
 + Response 201
@@ -178,7 +178,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "nostrum"
+                  "name": "porro"
                 },
                 "relationships": {
                   "user": {
@@ -225,6 +225,24 @@
               ]
             }
 
++ Request when unauthenticated
+**POST**&nbsp;&nbsp;`/api/v1/projects`
+
+    + Headers
+
+            Content-Type: application/x-www-form-urlencoded
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
+    + Body
+
+            {"name":"iure"}
+
++ Response 401
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
+
 ### Delete Project [DELETE /api/v1/projects/{id}]
 
 + Parameters
@@ -254,6 +272,20 @@
 
             Content-Type: text/html; charset=utf-8
 
++ Request gets project of ohter user
+**DELETE**&nbsp;&nbsp;`/api/v1/projects/2`
+
+    + Headers
+
+            Content-Type: application/json
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
++ Response 403
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
+
 ### Get Projects [GET /api/v1/projects]
 
 
@@ -262,6 +294,7 @@
 
     + Headers
 
+            Content-Type: application/json
             Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 
 + Response 200
@@ -278,7 +311,7 @@
                   "id": "1",
                   "type": "project",
                   "attributes": {
-                    "name": "maxime"
+                    "name": "project #5"
                   },
                   "relationships": {
                     "user": {
@@ -293,10 +326,10 @@
                   }
                 },
                 {
-                  "id": "1",
+                  "id": "2",
                   "type": "project",
                   "attributes": {
-                    "name": "quam"
+                    "name": "project #6"
                   },
                   "relationships": {
                     "user": {
@@ -311,10 +344,29 @@
                   }
                 }
               ],
-              "links": {
-                "self": "/api/v1/projects"
-              }
+              "meta": {
+                "page": {
+                  "page": 1,
+                  "limit": 2,
+                  "pages": 1,
+                  "total": 2
+                }
+              },
+              "links": "/api/v1/projects"
             }
+
++ Request when unauthenticated
+**GET**&nbsp;&nbsp;`/api/v1/projects`
+
+    + Headers
+
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
++ Response 401
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
 
 ### Get Project [GET /api/v1/projects/{id}]
 
@@ -326,6 +378,7 @@
 
     + Headers
 
+            Content-Type: application/json
             Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 
 + Response 200
@@ -341,7 +394,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "temporibus"
+                  "name": "project #9"
                 },
                 "relationships": {
                   "user": {
@@ -362,9 +415,24 @@
 
     + Headers
 
+            Content-Type: application/json
             Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 
 + Response 404
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
+
++ Request gets project of ohter user
+**GET**&nbsp;&nbsp;`/api/v1/projects/2`
+
+    + Headers
+
+            Content-Type: application/json
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
++ Response 403
 
     + Headers
 
@@ -386,7 +454,7 @@
     + Body
 
             {
-              "name": "necessitatibus"
+              "name": "aperiam"
             }
 
 + Response 200
@@ -402,7 +470,7 @@
                 "id": "1",
                 "type": "project",
                 "attributes": {
-                  "name": "necessitatibus"
+                  "name": "aperiam"
                 },
                 "relationships": {
                   "user": {
@@ -454,14 +522,36 @@
 
     + Headers
 
-            Content-Type: application/x-www-form-urlencoded
+            Content-Type: application/json
             Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 
     + Body
 
-            {"name":"voluptatum"}
+            {
+              "name": "quibusdam"
+            }
 
 + Response 404
+
+    + Headers
+
+            Content-Type: text/html; charset=utf-8
+
++ Request gets project of ohter user
+**PATCH**&nbsp;&nbsp;`/api/v1/projects/2`
+
+    + Headers
+
+            Content-Type: application/json
+            Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+
+    + Body
+
+            {
+              "name": "beatae"
+            }
+
++ Response 403
 
     + Headers
 
