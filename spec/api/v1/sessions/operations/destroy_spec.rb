@@ -1,8 +1,9 @@
 RSpec.describe Api::V1::Sessions::Operations::Destroy, type: :operations do
   include JWTSessions::RailsAuthorization
+  subject(:operation) { described_class.call(payload: payload, params: params) }
 
   let!(:user) { create(:user) }
-  let(:valid_params) { { username: user.username, password: user.password } }
+  let(:params) { {} }
 
   let!(:request) { ActionDispatch::Request.new({ 'REQUEST_METHOD' => 'DELETE' }) }
   let!(:headers) { authenticated_header(user) }
@@ -13,14 +14,13 @@ RSpec.describe Api::V1::Sessions::Operations::Destroy, type: :operations do
   end
 
   describe 'sign out' do
-    it { expect(described_class.call(payload: payload, params: {})).to be_success }
-  end
+    it { is_expected.to be_success }
 
-  describe 'when get projects after sign out' do
-    before do
-      described_class.call(payload: payload, params: {})
+    it 'raises error' do
+      expect do
+        operation
+        authorize_access_request!
+      end.to raise_error JWTSessions::Errors::Unauthorized
     end
-
-    it { expect(Api::V1::Projects::Operations::Show.call(params: {})).to be_failure }
   end
 end

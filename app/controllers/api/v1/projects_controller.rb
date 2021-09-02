@@ -1,23 +1,21 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
-  include Api::V1::Projects
-
   def index
-    endpoint operation: Operations::Index
+    endpoint operation: Api::V1::Projects::Operations::Index
   end
 
   def show
-    endpoint operation: Operations::Show
+    endpoint operation: Api::V1::Projects::Operations::Show
   end
 
   def create
-    endpoint operation: Operations::Create
+    endpoint operation: Api::V1::Projects::Operations::Create
   end
 
   def update
-    endpoint operation: Operations::Update
+    endpoint operation: Api::V1::Projects::Operations::Update
   end
 
   def destroy
-    endpoint operation: Operations::Destroy
+    endpoint operation: Api::V1::Projects::Operations::Destroy
   end
 end

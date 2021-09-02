@@ -5,49 +5,29 @@ RSpec.describe 'GET Project', type: :request do
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
 
-  describe 'Success result' do
-    before do
-      get api_v1_project_path(project), headers: authenticated_header(user)
-    end
-
-    it 'gets project', :dox do
-      expect(response)
-        .to have_http_status(:ok)
-        .and match_json_schema('v1/projects/instance')
-    end
+  before do
+    get api_v1_project_path(project), headers: headers
   end
 
-  describe 'fail result' do
-    context 'when get invalid id' do
-      let(:invalid_id) { { id: :invalid_id } }
+  describe 'Success' do
+    include_examples 'has success status', schema: 'v1/projects/instance'
+  end
 
-      before do
-        get api_v1_project_path(invalid_id), headers: authenticated_header(user)
-      end
-
-      it 'gets project with invalid id', :dox do
-        expect(response).to have_http_status(:not_found)
-      end
+  describe 'Failure' do
+    context 'when user is unauthenticated' do
+      include_examples 'has unauthorized status'
     end
 
-    context 'when accesses project of other user' do
-      let(:project2) { create(:project) }
+    context 'when access invalid project' do
+      let(:project) { build(:project, id: 'invalid id') }
 
-      before do
-        get api_v1_project_path(project2), headers: authenticated_header(user)
-      end
-
-      it 'gets project of ohter user', :dox do
-        expect(response).to have_http_status(:forbidden)
-      end
+      include_examples 'has not found status'
     end
 
-    context 'when unauthenticated' do
-      before do
-        get api_v1_project_path(project)
-      end
+    context 'when access project of other user' do
+      let!(:project) { create(:project) }
 
-      it { expect(response).to have_http_status(:unauthorized) }
+      include_examples 'has forbidden status'
     end
   end
 end

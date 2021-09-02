@@ -3,7 +3,7 @@ class Api::V1::Projects::Contracts::Update < Reform::Form
 
   validation name: :default do
     params do
-      required(:name).filled
+      required(:name).filled(:str?)
     end
   end
 end

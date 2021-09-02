@@ -1,20 +1,23 @@
 RSpec.describe Api::V1::Users::Operations::Create, type: :operations do
-  let(:user) { build(:user) }
-  let(:valid_params) { { username: user.username, password: user.password, password_confirmation: user.password } }
+  subject(:operation) { described_class.call(params: params) }
 
-  describe 'success' do
-    it { expect(described_class.call(params: valid_params)).to be_success }
+  let(:user) { build(:user) }
+
+  describe 'Success' do
+    let(:params) { { username: user.username, password: user.password, password_confirmation: user.password } }
+
+    it { is_expected.to be_success }
 
     it 'creates user' do
-      expect { described_class.call(params: valid_params) }.to change(User, :count).by(1)
+      expect { operation }.to change(User, :count).by(1)
     end
   end
 
-  describe 'fail' do
-    let(:invalid_params) { { username: 'us', password: 'short', password_confirmation: 'foo' } }
+  describe 'Failure' do
+    let(:params) { { username: 'us', password: 'short', password_confirmation: 'foo' } }
 
-    it { expect(described_class.call(params: invalid_params)).to be_failure }
+    it { is_expected.to be_failure }
 
-    it { expect { described_class.call(params: invalid_params) }.not_to change(User, :count) }
+    it { expect { operation }.not_to change(User, :count) }
   end
 end

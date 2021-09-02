@@ -2,40 +2,22 @@ RSpec.describe 'Registration', type: :request do
   include Docs::V1::Users::Api
   include Docs::V1::Users::Create
 
-  context 'when valid params' do
-    let(:user) { build(:user) }
-    let!(:valid_params) { { username: user.username, password: user.password, password_confirmation: user.password } }
-    let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+  let(:user) { build(:user) }
+  let!(:params) { { username: user.username, password: user.password, password_confirmation: user.password } }
 
-    before do
-      post api_v1_auth_path, params: valid_params
-    end
-
-    it 'registers user with valid params', :dox do
-      expect(response).to have_http_status(:created)
-    end
-
-    it { expect(response).to match_json_schema('v1/sessions/create') }
+  before do
+    post api_v1_auth_path, params: params
   end
 
-  context 'when invalid params' do
-    let(:password) { FFaker::Internet.password(10) }
-    let(:invalid_params) do
-      {
-        username: FFaker::Lorem.word,
-        password: 'Inv@lid P@$$w0rd',
-        password_confirmation: 'inValid pAssword'
-      }
-    end
+  describe 'Success' do
+    include_examples 'has created status', schema: 'v1/sessions/create'
+  end
 
-    before do
-      post api_v1_auth_path, params: invalid_params
-    end
+  describe 'Failure' do
+    context 'when params is invalid' do
+      let(:params) { { username: 'user', password: 'Inv@lid P@$$w0rd', password_confirmation: 'inValid pAssword' } }
 
-    it 'register user with invalid params', :dox do
-      expect(response)
-        .to have_http_status(:unprocessable_entity)
-        .and match_json_schema('v1/base/errors')
+      include_examples 'has unprocessable entity status'
     end
   end
 end

@@ -6,29 +6,16 @@ RSpec.describe 'GET Projects', type: :request do
 
   before do
     create_list(:project, 2, user: user)
+    get api_v1_projects_path, headers: headers
   end
 
-  describe 'Success result' do
-    before do
-      get api_v1_projects_path, headers: authenticated_header(user)
-    end
-
-    it 'gets index of projects', :dox do
-      expect(response)
-        .to have_http_status(:ok)
-        .and match_json_schema('v1/projects/collection')
-    end
+  describe 'Success' do
+    include_examples 'has success status', schema: 'v1/projects/collection'
   end
 
-  describe 'fail result' do
-    context 'when unauthenticated' do
-      before do
-        get api_v1_projects_path
-      end
-
-      it 'when unauthenticated', :dox do
-        expect(response).to have_http_status(:unauthorized)
-      end
+  describe 'Failure' do
+    context 'when user is unauthenticated' do
+      include_examples 'has unauthorized status'
     end
   end
 end

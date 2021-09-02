@@ -1,13 +1,9 @@
 class Api::V1::Projects::Operations::Show < Trailblazer::Operation
-  include Api::V1::Projects
-
   step Model(Project, :find_by)
-  step Policy::Pundit(Policies::ProjectPolicy, :show?)
+  step Policy::Pundit(Api::V1::Projects::Policies::ProjectPolicy, :show?)
   pass :assign_data
 
-  private
-
   def assign_data(ctx, **)
-    ctx[:data] = Serializers::ProjectSerializer.new(ctx[:model])
+    ctx[:data] = Api::V1::Projects::Serializers::ProjectSerializer.new(ctx[:model])
   end
 end

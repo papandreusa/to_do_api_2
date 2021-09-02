@@ -1,16 +1,18 @@
 RSpec.describe Api::V1::Sessions::Operations::Create, type: :operations do
-  let!(:user) { create(:user) }
-  let(:valid_params) { { username: user.username, password: user.password } }
+  subject(:operation) { described_class.call(params: params) }
 
-  describe 'success' do
-    it { expect(described_class.call(params: valid_params)).to be_success }
-    it { expect(described_class.call(params: valid_params).to_hash.dig(:data, :access)).not_to be_nil }
+  let!(:user) { create(:user) }
+  let(:params) { { username: user.username, password: user.password } }
+
+  describe 'Success' do
+    it { is_expected.to be_success }
+    it { expect(operation.to_hash.dig(:data, :access)).to be_present }
   end
 
-  describe 'fail' do
-    let(:invalid_params) { { username: user.username, password: '1nvalid pa$$word' } }
+  describe 'Failure' do
+    let(:params) { { username: user.username, password: '1nvalid pa$$word' } }
 
-    it { expect(described_class.call(params: invalid_params)).to be_failure }
-    it { expect(described_class.call(params: invalid_params)[:data]).to be_nil }
+    it { is_expected.to be_failure }
+    it { expect(operation[:data]).to be_nil }
   end
 end

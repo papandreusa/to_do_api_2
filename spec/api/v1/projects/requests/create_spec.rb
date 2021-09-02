@@ -2,45 +2,26 @@ RSpec.describe 'Create Project', type: :request do
   include Docs::V1::Projects::Api
   include Docs::V1::Projects::Create
 
-  let(:name) { FFaker::Lorem.word }
-  let(:params) { { name: name } }
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
+  let(:params) { { name: FFaker::Lorem.word } }
 
-  describe 'Success result' do
-    before do
-      post api_v1_projects_path, params: params.to_json, headers: authenticated_header(user)
-    end
-
-    it 'posts valid params', :dox do
-      expect(response)
-        .to have_http_status(:created)
-        .and match_json_schema('v1/projects/instance')
-    end
+  before do
+    post api_v1_projects_path, params: params.to_json, headers: headers
   end
 
-  describe 'fail result' do
-    context 'when post invalid params' do
-      let(:params) { { name: nil } }
+  describe 'Success' do
+    include_examples 'has created status', schema: 'v1/projects/instance'
+  end
 
-      before do
-        post api_v1_projects_path, params: params.to_json, headers: authenticated_header(user)
-      end
-
-      it 'posts invalid params', :dox do
-        expect(response)
-          .to have_http_status(:unprocessable_entity)
-          .and match_json_schema('v1/base/errors')
-      end
+  describe 'Failure' do
+    context 'when user is unauthenticated' do
+      include_examples 'has unauthorized status'
     end
 
-    context 'when unauthenticated' do
-      before do
-        post api_v1_projects_path, params: params.to_json, headers: headers
-      end
+    context 'when params is invalid' do
+      let(:params) { { name: '' } }
 
-      it 'when unauthenticated', :dox do
-        expect(response).to have_http_status(:unauthorized)
-      end
+      include_examples 'has unprocessable entity status'
     end
   end
 end

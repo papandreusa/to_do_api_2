@@ -1,17 +1,21 @@
 RSpec.describe Api::V1::Projects::Contracts::Update do
-  subject(:contract) { described_class.new(project) }
+  subject(:validation) { contract.validate(params) }
 
+  let(:contract) { described_class.new(project) }
   let(:project) { create(:project) }
-  let(:name) { '' }
 
   context 'when name is invalid' do
+    let(:params) { { name: '' } }
+
     it 'has error message' do
-      expect { contract.validate({ name: name }) }
-        .to change { contract.errors.messages[:name] }.to([I18n.t('errors.be_filled')])
+      expect { validation }
+        .to change { contract.errors.messages[:name]&.include? I18n.t('errors.be_filled') }.to(true)
     end
   end
 
   context 'when params are valid' do
-    it { expect(contract.validate({ name: FFaker::Lorem.word })).to be_truthy }
+    let(:params) { { name: FFaker::Lorem.word } }
+
+    it { expect(params).to be_truthy }
   end
 end

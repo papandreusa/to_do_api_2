@@ -69,3 +69,6 @@ RSpec/ExampleLength:
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+
+RSpec/LetSetup:
+  Enabled: false

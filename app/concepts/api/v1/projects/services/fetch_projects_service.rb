@@ -1,5 +1,4 @@
 class Api::V1::Projects::Services::FetchProjectsService
-  include Api::V1::Projects
   include Pagy::Backend
 
   def self.call(**args)
@@ -20,7 +19,7 @@ class Api::V1::Projects::Services::FetchProjectsService
   attr_reader :current_user, :params
 
   def fetch_projects
-    pagy(Policies::ProjectPolicy::Scope.new(current_user, Project).resolve, **permitted_params)
+    pagy(Api::V1::Projects::Policies::ProjectPolicy::Scope.new(current_user, Project).resolve, **permitted_params)
   end
 
   def permitted_params
