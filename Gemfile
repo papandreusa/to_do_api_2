@@ -3,14 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-gem 'acts_as_list', '~> 1.0'
+gem 'acts_as_list', '~> 1.0.4'
+gem 'aws-sdk-s3', '~> 1.100', require: false
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'draper', '~> 4.0'
 gem 'dry-matcher', '~> 0.9'
 gem 'dry-validation', '1.6'
 gem 'json-api', '~> 0.1'
-gem 'jsonapi-serializer'
+gem 'jsonapi-serializer', '~> 2.2'
 gem 'jwt', '~> 2.2'
 gem 'jwt_sessions', '~> 2.6'
 gem 'pagy', '~> 4.10'

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "type": "object",
+  "properties": {
+      "data": {
+          "type": "array",
+          "items": {
+              "anyOf": [
+                  {
+                      "type": "object",
+                      "properties": {
+                          "id": {
+                              "type": "string"
+                          },
+                          "type": {
+                              "type": "string"
+                          },
+                          "attributes": {
+                              "type": "object",
+                              "properties": {
+                                  "body": {
+                                      "type": "string"
+                                  },
+                                  "image": {
+                                      "type": ["null", "string"]
+                                  }
+                              }
+                          },
+                          "relationships": {
+                              "type": "object",
+                              "properties": {
+                                  "task": {
+                                      "type": "object",
+                                      "properties": {
+                                          "data": {
+                                              "type": "object",
+                                              "properties": {
+                                                  "id": {
+                                                      "type": "string"
+                                                  },
+                                                  "type": {
+                                                      "type": "string"
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          },
+                          "links": {
+                              "type": "object",
+                              "properties": {
+                                  "self": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+      },
+      "links": {
+          "type": "string"
+      }
+  }
+}

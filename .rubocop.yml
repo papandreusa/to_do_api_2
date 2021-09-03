@@ -76,3 +76,7 @@ RSpec/LetSetup:
 Naming/MethodName:
   Exclude:
     - 'app/concepts/api/v1/lib/macro.rb'
+  
+Rails/ApplicationController:
+  Exclude:
+    - 'app/controllers/api/v1/api_docs_controller.rb'

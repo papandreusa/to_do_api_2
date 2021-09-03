@@ -17,3 +17,4 @@ en:
     be_between: 'must be between %{min} and %{max}'
     be_date: 'must be a date'
     be_integer: 'must be an integer'
+    invalid_file_size: is tooo big

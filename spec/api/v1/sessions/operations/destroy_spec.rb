@@ -6,10 +6,9 @@ RSpec.describe Api::V1::Sessions::Operations::Destroy, type: :operations do
   let(:params) { {} }
 
   let!(:request) { ActionDispatch::Request.new({ 'REQUEST_METHOD' => 'DELETE' }) }
-  let!(:headers) { authenticated_header(user) }
 
   before do
-    request.headers.merge! headers
+    request.headers.merge! authenticated_header(user)
     authorize_access_request!
   end
 

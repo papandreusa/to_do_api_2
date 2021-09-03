@@ -2,8 +2,13 @@ namespace :api do
   namespace :v1 do
     desc 'Generate API v1 documentation'
 
-    md_file = 'spec/docs/v1/docs.md'
-    html_file = 'public/docs/v1.html'
+    md_file = ''
+    html_file = ''
+
+    task set_variables: :environment do
+      md_file = Api::V1::ApiDocs::Constants::API_DOCS_MD
+      html_file = Api::V1::ApiDocs::Constants::API_DOCS_HTML
+    end
 
     task md: :environment do
       puts 'md task'
@@ -19,6 +24,6 @@ namespace :api do
       system("bundle exec aglio -i #{md_file} -o #{html_file}")
     end
 
-    task docs: ['api:v1:md', 'api:v1:html']
+    task docs: ['api:v1:set_variables', 'api:v1:md', 'api:v1:html']
   end
 end

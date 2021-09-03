@@ -1,6 +1,5 @@
 module Api::V1::Endpoint
   include SimpleEndpoint::Controller
-  include Api::V1::Lib
 
   private
 
@@ -73,7 +72,7 @@ module Api::V1::Endpoint
   end
 
   def unprocessable_entity_handler(result)
-    render json: Serializers::ErrorSerializer.new(result['contract.default'].errors).serialize,
+    render json: Api::V1::Lib::Serializers::ErrorSerializer.new(result['contract.default'].errors).serialize,
            status: :unprocessable_entity
   end
 

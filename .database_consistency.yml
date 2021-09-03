@@ -1,2 +1,8 @@
 Task:
   enabled: false
+ActiveStorage::Attachment:
+  enabled: false
+ActiveStorage::Blob:
+  enabled: false
+ActiveStorage::VariantRecord:
+  enabled: false

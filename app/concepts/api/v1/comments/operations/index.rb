@@ -1,0 +1,18 @@
+class Api::V1::Comments::Operations::Index < Trailblazer::Operation
+  include Pagy::Backend
+
+  step :model
+  step Policy::Pundit(Api::V1::Tasks::Policies::TaskPolicy, :comments?)
+  step :assign_collection
+  step Api::V1::Lib::Macro::AssignData(serializer: Api::V1::Comments::Serializers::CommentSerializer,
+                                       type: :collection,
+                                       args: [:task])
+
+  def model(ctx, params:, **)
+    ctx[:model] = ctx[:task] = Task.find_by(id: params[:task_id])
+  end
+
+  def assign_collection(ctx, current_user:, task:, **)
+    ctx[:collection] = Api::V1::Comments::Policies::CommentPolicy::Scope.new(current_user, task.comments).resolve
+  end
+end
