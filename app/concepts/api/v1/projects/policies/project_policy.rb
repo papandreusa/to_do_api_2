@@ -1,8 +1,4 @@
 class Api::V1::Projects::Policies::ProjectPolicy < ::ApplicationPolicy
-  def index?
-    user.present?
-  end
-
   def manage?
     record.user_id == user.id
   end

@@ -6,7 +6,7 @@ RSpec.describe Api::V1::Projects::Operations::Index, type: :operations do
 
   before { create_list(:project, 2, user: user) }
 
-  describe 'success' do
+  describe 'Success' do
     it { is_expected.to be_success }
   end
 end

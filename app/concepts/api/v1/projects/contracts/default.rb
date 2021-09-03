@@ -1,4 +1,4 @@
-class Api::V1::Projects::Contracts::Update < Reform::Form
+class Api::V1::Projects::Contracts::Default < Reform::Form
   property :name
 
   validation name: :default do

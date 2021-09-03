@@ -72,3 +72,7 @@ Layout/MultilineMethodCallIndentation:
 
 RSpec/LetSetup:
   Enabled: false
+
+Naming/MethodName:
+  Exclude:
+    - 'app/concepts/api/v1/lib/macro.rb'

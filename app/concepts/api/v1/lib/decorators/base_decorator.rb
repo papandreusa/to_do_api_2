@@ -3,7 +3,7 @@ class Api::V1::Lib::Decorators::BaseDecorator < ::Draper::Decorator
 
   class << self
     def permitted_params(params)
-      params.except(*%i[controller action format])
+      params.slice(*%i[sort page limit after before])
     end
   end
 end

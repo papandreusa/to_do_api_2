@@ -2,7 +2,7 @@ RSpec.describe Api::V1::Users::Contracts::Create do
   subject(:validation) { contract.validate(params) }
 
   let(:contract) { described_class.new(User.new) }
-  let(:username) { FFaker::Internet.user_name }
+  let(:username) { build(:user).username }
   let(:password) { Api::V1::Users::Constants::PASSWORD_REGEX.random_example }
   let(:params) { { username: username, password: password, password_confirmation: password } }
 

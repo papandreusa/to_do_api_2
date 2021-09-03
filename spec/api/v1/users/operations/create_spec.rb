@@ -9,7 +9,7 @@ RSpec.describe Api::V1::Users::Operations::Create, type: :operations do
     it { is_expected.to be_success }
 
     it 'creates user' do
-      expect { operation }.to change(User, :count).by(1)
+      expect { operation }.to change(User, :count).from(0).to(1)
     end
   end
 

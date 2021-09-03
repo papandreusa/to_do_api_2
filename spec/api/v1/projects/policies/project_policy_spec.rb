@@ -4,19 +4,6 @@ RSpec.describe Api::V1::Projects::Policies::ProjectPolicy, type: :policy do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
-  describe '#index?' do
-    context 'when user is authenticated' do
-      it { is_expected.to permit_action(:index) }
-    end
-
-    context 'when user is unauthenticated' do
-      let(:user) { nil }
-      let(:project) { create(:project) }
-
-      it { is_expected.not_to permit_action(:index) }
-    end
-  end
-
   %i[show create update destroy].each do |action|
     describe "##{action}?" do
       context 'when user is owner of project' do

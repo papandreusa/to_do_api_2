@@ -1,4 +1,4 @@
-RSpec.describe Api::V1::Projects::Contracts::Create do
+RSpec.describe Api::V1::Projects::Contracts::Default do
   subject(:validation) { contract.validate(params) }
 
   let(:contract) { described_class.new(Project.new) }

@@ -3,19 +3,14 @@ RSpec.describe Api::V1::Projects::Operations::Show, type: :operations do
 
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user) }
+  let(:params) { { id: project.id } }
 
   describe 'success' do
-    let(:params) { { id: project.id } }
-
     it { is_expected.to be_success }
   end
 
   describe 'failure ' do
-    context 'when project created by other user' do
-      let!(:project) { create(:project) }
-      let(:params) { { id: project.id } }
-
-      it { is_expected.to be_failure }
-    end
+    it_behaves_like 'project not found'
+    it_behaves_like 'project created by other user'
   end
 end

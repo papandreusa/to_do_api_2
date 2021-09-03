@@ -4,7 +4,7 @@ RSpec.describe 'Sing In', type: :request do
 
   let!(:user) { create(:user) }
   let(:params) { { username: user.username, password: user.password } }
-  let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+  let(:headers) { unauthenticated_header }
 
   before do
     post api_v1_auth_sign_in_path, params: params.to_json, headers: headers

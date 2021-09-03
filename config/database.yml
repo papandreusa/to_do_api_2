@@ -18,5 +18,3 @@ test:
 production:
   <<: *default
   database: to_do_api_2_production
-  username: to_do_api
-  password: <%= ENV['TO_DO_API_2_DATABASE_PASSWORD'] %>
