@@ -9,6 +9,6 @@ module AuthenticationHelper
   end
 end
 
-RSpec.configure do |c|
-  c.include AuthenticationHelper
+RSpec.configure do |config|
+  config.include AuthenticationHelper
 end
