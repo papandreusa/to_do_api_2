@@ -4,14 +4,15 @@ class Api::V1::Tasks::Operations::Index < Trailblazer::Operation
   step :assign_collection
   step Api::V1::Lib::Macro::AssignData(serializer: Api::V1::Tasks::Serializers::TaskSerializer,
                                        type: :collection,
-                                       args: %i[project params])
+                                       project: :model,
+                                       params: :params)
 
   def model(ctx, params:, **)
-    ctx[:model] = ctx[:project] = Project.find_by(id: params[:project_id])
+    ctx[:model] = Project.find_by(id: params[:project_id])
   end
 
-  def assign_collection(ctx, current_user:, project:, params:, **)
+  def assign_collection(ctx, current_user:, model:, params:, **)
     ctx[:collection] =
-      Api::V1::Tasks::Services::FetchTasksService.call(current_user: current_user, project: project, params: params)
+      Api::V1::Tasks::Services::FetchTasksService.call(current_user: current_user, project: model, params: params)
   end
 end
