@@ -6,13 +6,13 @@ class Api::V1::Comments::Operations::Index < Trailblazer::Operation
   step :assign_collection
   step Api::V1::Lib::Macro::AssignData(serializer: Api::V1::Comments::Serializers::CommentSerializer,
                                        type: :collection,
-                                       args: [:task])
+                                       task: :model)
 
   def model(ctx, params:, **)
-    ctx[:model] = ctx[:task] = Task.find_by(id: params[:task_id])
+    ctx[:model] = Task.find_by(id: params[:task_id])
   end
 
-  def assign_collection(ctx, current_user:, task:, **)
-    ctx[:collection] = Api::V1::Comments::Policies::CommentPolicy::Scope.new(current_user, task.comments).resolve
+  def assign_collection(ctx, current_user:, model:, **)
+    ctx[:collection] = Api::V1::Comments::Policies::CommentPolicy::Scope.new(current_user, model.comments).resolve
   end
 end
