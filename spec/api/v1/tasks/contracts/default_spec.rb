@@ -13,22 +13,16 @@ RSpec.describe Api::V1::Tasks::Contracts::Default do
   context 'when invalid name' do
     let(:params) { { name: nil } }
 
-    it 'has error message' do
-      expect { validation }.to change {
-        contract.errors.messages[:name]&.include?\
-          I18n.t('errors.be_filled')
-      }.to(true)
-    end
+    before { contract.validate(params) }
+
+    it { expect(contract.errors.messages[:name]).to be_include 'must be filled' }
   end
 
   context 'when invalid type of due_date' do
     let(:params) { { due_date: 'invalid due date' } }
 
-    it 'has errors' do
-      expect { validation }.to change {
-        contract.errors.messages[:due_date]&.include?\
-          I18n.t('errors.be_date')
-      }.to(true)
-    end
+    before { contract.validate(params) }
+
+    it { expect(contract.errors.messages[:due_date]).to be_include 'must be a date' }
   end
 end

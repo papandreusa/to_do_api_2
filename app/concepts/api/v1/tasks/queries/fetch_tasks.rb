@@ -1,6 +1,4 @@
 class Api::V1::Tasks::Queries::FetchTasks
-  include Pagy::Backend
-
   def self.call(**args)
     new(**args).call
   end
@@ -24,6 +22,6 @@ class Api::V1::Tasks::Queries::FetchTasks
   end
 
   def tasks_order
-    Api::V1::Tasks::Constants::ORDERS[params[:sort]] || Api::V1::Tasks::Constants::ORDER_DEFAULT
+    Api::V1::Constants::Task::ORDERS[params[:sort]] || Api::V1::Constants::Task::ORDER_DEFAULT
   end
 end

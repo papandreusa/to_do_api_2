@@ -14,21 +14,17 @@ RSpec.describe Api::V1::Tasks::Contracts::UpdatePosition do
   context 'when invalid type of position' do
     let(:params) { { position: 'invalid position' } }
 
-    it 'has errors' do
-      expect { validation }.to change {
-        contract.errors.messages[:position]&.include? 'must be an integer'
-      }.to(true)
-    end
+    before { contract.validate(params) }
+
+    it { expect(contract.errors.messages[:position]).to be_include 'must be an integer' }
   end
 
   context 'when invalid position' do
     let(:max_position) { project.tasks_count }
     let(:params) { { position: max_position.next } }
 
-    it 'has errors' do
-      expect { validation }.to change {
-        contract.errors.messages[:position]&.include? 'must be less than or equal to 3'
-      }.to(true)
-    end
+    before { contract.validate(params) }
+
+    it { expect(contract.errors.messages[:position]).to be_include 'must be less than or equal to 3' }
   end
 end

@@ -4,8 +4,8 @@ FactoryBot.define do
     user
 
     trait :with_tasks do
-      after(:create) do |project|
-        create_list(:task, 2, project: project)
+      after(:create) do |project, evaluator|
+        create_list(:task, evaluator.tasks_count || 2, project: project)
       end
     end
   end

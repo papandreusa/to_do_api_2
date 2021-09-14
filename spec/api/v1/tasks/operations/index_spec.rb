@@ -10,6 +10,10 @@ RSpec.describe Api::V1::Tasks::Operations::Index, type: :operations do
   end
 
   describe 'Failure' do
-    it_behaves_like 'project created by other user'
+    context 'when project is not found' do
+      let(:project) { build(:project, id: 'invalid id') }
+
+      it { expect(operation['model']).to be_nil }
+    end
   end
 end

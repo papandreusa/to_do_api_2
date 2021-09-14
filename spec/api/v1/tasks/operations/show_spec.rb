@@ -11,7 +11,16 @@ RSpec.describe Api::V1::Tasks::Operations::Show, type: :operations do
   end
 
   describe 'Failure ' do
-    it_behaves_like 'task created by other user'
-    it_behaves_like 'task not found'
+    context 'when task is not found' do
+      let(:task) { build(:task, id: 'invalid id') }
+
+      it { expect(operation['model']).to be_nil }
+    end
+
+    context 'when task created by other user' do
+      let!(:task) { create(:task) }
+
+      it { expect(operation['result.policy.default']).to be_failure }
+    end
   end
 end

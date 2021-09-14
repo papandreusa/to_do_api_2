@@ -18,22 +18,18 @@ RSpec.describe Api::V1::Tasks::Operations::Create, type: :operations do
       let(:params) { { name: '', project_id: project.id } }
 
       it { expect(operation['contract.default'].errors.messages[:name]).to be_include('must be filled') }
-      it { is_expected.to be_failure }
     end
 
     context 'when project is not found' do
-      let(:project) { build(:project , id: 'invalid id') }
+      let(:project) { build(:project, id: 'invalid id') }
 
       it { expect(operation['model']).to be_nil }
-      it { is_expected.to be_failure }
     end
 
     context 'when project created by other user' do
       let!(:project) { create(:project) }
 
       it { expect(operation['result.policy.default']).to be_failure }
-      it { is_expected.to be_failure }
     end
-
   end
 end

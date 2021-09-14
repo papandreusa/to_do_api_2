@@ -7,7 +7,6 @@ class Api::V1::Projects::Policies::ProjectPolicy < ::ApplicationPolicy
   alias create? manage?
   alias update? manage?
   alias destroy? manage?
-  alias tasks? manage?
 
   class Scope < ::ApplicationPolicy::Scope
     def resolve

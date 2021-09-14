@@ -8,12 +8,10 @@ Rails.application.routes.draw do
       end
 
       resources :projects do
-        resources :tasks, only: %i[index create]
-      end
-
-      resources :tasks, only: %i[show update destroy] do
-        patch :complete, controller: :tasks_completes, action: :update
-        patch :position, controller: :tasks_positions, action: :update
+        resources :tasks, shallow: true do
+          patch :complete, controller: :tasks_completes, action: :update
+          patch :position, controller: :tasks_positions, action: :update
+        end
       end
     end
   end

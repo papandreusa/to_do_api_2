@@ -1,4 +1,4 @@
-module Api::V1::Tasks::Constants
+module Api::V1::Constants::Task
   POSITION_MIN = 1
   ORDERS = { 'created_desc' => 'tasks.created_at desc',
              'created_asc' => 'tasks.created_at',

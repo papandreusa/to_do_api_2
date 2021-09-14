@@ -10,18 +10,30 @@ RSpec.describe Api::V1::Tasks::Operations::UpdatePosition, type: :operations do
     it { is_expected.to be_success }
 
     it 'change task`s position' do
-      expect do
-        operation
-      end.to change { task.reload.position }.to(params[:position])
+      expect { operation }.to change { task.reload.position }.to(params[:position])
     end
   end
 
   describe 'Failure ' do
-    it_behaves_like 'task validation fails' do
-      let(:params) { { task_id: task.id, position: project.tasks.count.next} }
+    context 'when validation fails' do
+      let(:params) { { task_id: task.id, position: project.tasks.count.next } }
+
+      it 'has errors message' do
+        expect(operation['contract.default'].errors.messages[:position])
+          .to be_include('must be less than or equal to 3')
+      end
     end
 
-    it_behaves_like 'task created by other user'
-    it_behaves_like 'task not found'
+    context 'when task is not found' do
+      let(:task) { build(:task, id: 'invalid id') }
+
+      it { expect(operation['model']).to be_nil }
+    end
+
+    context 'when task created by other user' do
+      let!(:task) { create(:task) }
+
+      it { expect(operation['result.policy.default']).to be_failure }
+    end
   end
 end

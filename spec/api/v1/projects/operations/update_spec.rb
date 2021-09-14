@@ -9,9 +9,7 @@ RSpec.describe Api::V1::Projects::Operations::Update, type: :operations do
     it { is_expected.to be_success }
 
     it 'change project name' do
-      expect do
-        operation
-      end.to(change { project.reload.name })
+      expect { operation }.to(change { project.reload.name })
     end
   end
 

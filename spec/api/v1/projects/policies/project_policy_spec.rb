@@ -4,7 +4,7 @@ RSpec.describe Api::V1::Projects::Policies::ProjectPolicy, type: :policy do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
-  %i[show create update destroy tasks].each do |action|
+  %i[show create update destroy].each do |action|
     describe "##{action}?" do
       context 'when user is owner of project' do
         it { is_expected.to permit_action(action) }

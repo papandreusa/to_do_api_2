@@ -18,12 +18,6 @@ RSpec.describe 'GET Tasks', type: :request do
       include_examples 'has unauthorized status'
     end
 
-    context 'when access tasks of other user' do
-      let!(:project) { create(:project, :with_tasks) }
-
-      include_examples 'has forbidden status'
-    end
-
     context 'when access invalid project' do
       let(:project) { build(:project, id: 'invalid id') }
 
