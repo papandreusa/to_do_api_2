@@ -16,12 +16,11 @@ RSpec.describe Api::V1::Comments::Contracts::Create do
     context 'when body is invalid' do
       let(:params) { { body: 'a' * Api::V1::Constants::Comment::BODY_MIN.pred } }
 
+      before { validation }
+
       it 'has error message' do
-        expect { validation }
-          .to change {
-            contract.errors.messages[:body]&.include?\
-              I18n.t('errors.not_less', number: Api::V1::Constants::Comment::BODY_MIN)
-          }.to(true)
+        expect(contract.errors.messages[:body])
+          .to be_include I18n.t('errors.not_less', number: Api::V1::Constants::Comment::BODY_MIN)
       end
     end
 
@@ -30,13 +29,12 @@ RSpec.describe Api::V1::Comments::Contracts::Create do
 
       before do
         allow(images.first).to receive(:size) { Api::V1::Constants::Comment::IMAGE_MAX.next }
+        validation
       end
 
       it 'has error message' do
-        expect { validation }
-          .to change {
-            contract.errors.messages[:images]&.include?(I18n.t('errors.invalid_file_size'))
-          }.to(true)
+        expect(contract.errors.messages[:images])
+          .to be_include I18n.t('errors.invalid_file_size')
       end
     end
   end
