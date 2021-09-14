@@ -11,7 +11,10 @@ RSpec.describe Api::V1::Comments::Operations::Index, type: :operations do
   end
 
   describe 'Failure' do
-    it_behaves_like 'task created by other user'
-    it_behaves_like 'task not found'
+    context 'when task is not found' do
+      let(:task) { build(:task, id: 'invalid id') }
+
+      it { expect(operation['model']).to be_nil }
+    end
   end
 end

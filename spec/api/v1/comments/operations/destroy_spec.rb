@@ -11,14 +11,21 @@ RSpec.describe Api::V1::Comments::Operations::Destroy, type: :operations do
     it { is_expected.to be_success }
 
     it 'decrease count of comments' do
-      expect do
-        operation
-      end.to(change(task.comments, :count).by(-1))
+      expect { operation }.to(change(task.comments, :count).from(3).to(2))
     end
   end
 
   describe 'Failure' do
-    it_behaves_like 'comment not found'
-    it_behaves_like 'comment created by other user'
+    context 'when comment is not found' do
+      let(:comment) { build(:comment, id: 'invalid id') }
+
+      it { expect(operation['model']).to be_nil }
+    end
+
+    context 'when comment created by other user' do
+      let!(:comment) { create(:comment) }
+
+      it { expect(operation['result.policy.default']).to be_failure }
+    end
   end
 end

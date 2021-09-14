@@ -7,7 +7,7 @@ RSpec.describe 'Create comment', type: :request do
   let(:project) { create(:project, user: user) }
   let(:task) { create(:task, project: project) }
   let(:params) do
-    { body: 'a' * Api::V1::Comments::Constants::BODY_MIN,
+    { body: 'a' * Api::V1::Constants::Comment::BODY_MIN,
       images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comments::TEST_IMAGE), 'image/jpg')] }
   end
 
@@ -16,8 +16,14 @@ RSpec.describe 'Create comment', type: :request do
   end
 
   describe 'Success' do
-    context 'when params is valid' do
-      include_examples 'has created status', schema: 'v1/comments/instance'
+    context 'when params with image is valid' do
+      include_examples 'has created status', schema: 'v1/comments/show'
+    end
+
+    context 'when params without image is valid' do
+      let(:params) { { body: 'a' * Api::V1::Constants::Comment::BODY_MIN }.to_json }
+
+      include_examples 'has created status', schema: 'v1/comments/show'
     end
   end
 
@@ -28,7 +34,7 @@ RSpec.describe 'Create comment', type: :request do
 
     context 'when params is invalid' do
       let(:params) do
-        { body: 'a' * Api::V1::Comments::Constants::BODY_MIN.pred,
+        { body: 'a' * Api::V1::Constants::Comment::BODY_MIN.pred,
           images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comments::TEST_IMAGE), 'image/jpg')] }
       end
 

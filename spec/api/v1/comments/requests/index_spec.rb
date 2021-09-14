@@ -11,7 +11,7 @@ RSpec.describe 'GET Comments', type: :request do
   end
 
   describe 'Success result' do
-    include_examples 'has success status', schema: 'v1/comments/collection'
+    include_examples 'has success status', schema: 'v1/comments/index'
   end
 
   describe 'Failure' do
@@ -23,12 +23,6 @@ RSpec.describe 'GET Comments', type: :request do
       let(:task) { build(:task, id: 'invalid id') }
 
       include_examples 'has not found status'
-    end
-
-    context 'when access task of other user' do
-      let!(:task) { create(:task) }
-
-      include_examples 'has forbidden status'
     end
   end
 end

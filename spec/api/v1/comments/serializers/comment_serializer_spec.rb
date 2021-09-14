@@ -7,12 +7,12 @@ RSpec.describe Api::V1::Comments::Serializers::CommentSerializer, type: :seriali
   describe 'instance' do
     let(:args) { comment }
 
-    it { is_expected.to match_json_schema('v1/comments/instance') }
+    it { is_expected.to match_json_schema('v1/comments/show') }
   end
 
   describe 'collection' do
     let(:args) { [task.comments, { task: task }] }
 
-    it { is_expected.to match_json_schema('v1/comments/collection') }
+    it { is_expected.to match_json_schema('v1/comments/index') }
   end
 end
