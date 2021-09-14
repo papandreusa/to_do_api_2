@@ -2,7 +2,7 @@ class Api::V1::Tasks::Operations::Create < Trailblazer::Operation
   step :find_project
   step :model
   step Policy::Pundit(Api::V1::Tasks::Policies::TaskPolicy, :create?)
-  step Contract::Build(constant: Api::V1::Tasks::Contracts::Create)
+  step Contract::Build(constant: Api::V1::Tasks::Contracts::Default)
   step Contract::Validate()
   step Contract::Persist()
   step Api::V1::Lib::Macro::AssignData(serializer: Api::V1::Tasks::Serializers::TaskSerializer)

@@ -1,4 +1,4 @@
-class Api::V1::Tasks::Services::FetchTasksService
+class Api::V1::Tasks::Queries::FetchTasks
   include Pagy::Backend
 
   def self.call(**args)

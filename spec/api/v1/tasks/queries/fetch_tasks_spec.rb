@@ -1,4 +1,4 @@
-RSpec.describe Api::V1::Tasks::Services::FetchTasksService, type: :service do
+RSpec.describe Api::V1::Tasks::Queries::FetchTasks, type: :queries do
   subject(:result) { described_class.call(current_user: user, project: project, params: params) }
 
   let!(:user) { create(:user) }

@@ -12,7 +12,7 @@ RSpec.describe 'Create task', type: :request do
   end
 
   describe 'Success' do
-    include_examples 'has created status', schema: 'v1/tasks/instance'
+    include_examples 'has created status', schema: 'v1/tasks/show'
   end
 
   describe 'Failture' do

@@ -1,4 +1,4 @@
-class Api::V1::TasksPositionController < Api::V1::BaseController
+class Api::V1::TasksPositionsController < Api::V1::BaseController
   def update
     endpoint operation: Api::V1::Tasks::Operations::UpdatePosition
   end

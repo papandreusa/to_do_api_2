@@ -9,7 +9,7 @@ RSpec.describe 'GET Task', type: :request do
   before { get api_v1_task_path(task), headers: headers }
 
   describe 'Success' do
-    include_examples 'has success status', schema: 'v1/tasks/instance'
+    include_examples 'has success status', schema: 'v1/tasks/show'
   end
 
   describe 'Failure' do

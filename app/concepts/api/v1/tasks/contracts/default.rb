@@ -1,4 +1,4 @@
-class Api::V1::Tasks::Contracts::Update < Reform::Form
+class Api::V1::Tasks::Contracts::Default < Reform::Form
   property :name
   property :due_date
 

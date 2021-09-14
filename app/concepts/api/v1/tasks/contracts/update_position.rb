@@ -1,17 +1,16 @@
 class Api::V1::Tasks::Contracts::UpdatePosition < Reform::Form
   property :position, virtual: true
-  property :project
+  property :itself
 
   validation name: :default do
     params do
-      required(:position).filled(:int?)
-      required(:project)
+      required(:position).filled(:int?, gteq?: Api::V1::Tasks::Constants::POSITION_MIN)
+      required(:itself)
     end
 
-    rule :position do
-      unless values[:position].between?(1, values[:project].tasks_count)
-        key(:position).failure(I18n.t('errors.be_between',
-                                      min: Api::V1::Tasks::Constants::POSITION_MIN, max: values[:project].tasks_count))
+    rule(:position )  do
+      unless  values[:position] <= values[:itself].project.tasks.count
+        key.failure(:lteq?, num: values[:itself].project.tasks.count) 
       end
     end
   end

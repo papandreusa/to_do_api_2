@@ -11,8 +11,7 @@
                 "id",
                 "type",
                 "attributes",
-                "relationships",
-                "links"
+                "relationships"
             ],
             "properties": {
                 "id": {
@@ -72,17 +71,6 @@
                                     }
                                 }
                             }
-                        }
-                    }
-                },
-                "links": {
-                    "type": "object",
-                    "required": [
-                        "self"
-                    ],
-                    "properties": {
-                        "self": {
-                            "type": "string"
                         }
                     }
                 }

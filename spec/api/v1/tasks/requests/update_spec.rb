@@ -12,7 +12,7 @@ RSpec.describe 'Patch Task', type: :request do
   end
 
   describe 'Success' do
-    include_examples 'has success status', schema: 'v1/tasks/instance'
+    include_examples 'has success status', schema: 'v1/tasks/show'
   end
 
   describe 'Failure' do

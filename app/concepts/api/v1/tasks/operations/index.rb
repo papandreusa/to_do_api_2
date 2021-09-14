@@ -13,6 +13,6 @@ class Api::V1::Tasks::Operations::Index < Trailblazer::Operation
 
   def assign_collection(ctx, current_user:, model:, params:, **)
     ctx[:collection] =
-      Api::V1::Tasks::Services::FetchTasksService.call(current_user: current_user, project: model, params: params)
+      Api::V1::Tasks::Queries::FetchTasks.call(current_user: current_user, project: model, params: params)
   end
 end

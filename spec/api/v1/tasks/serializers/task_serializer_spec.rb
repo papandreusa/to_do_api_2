@@ -7,12 +7,12 @@ RSpec.describe Api::V1::Tasks::Serializers::TaskSerializer, type: :serializer do
   describe 'instance' do
     let(:args) { task }
 
-    it { is_expected.to match_json_schema('v1/tasks/instance') }
+    it { is_expected.to match_json_schema('v1/tasks/show') }
   end
 
   describe 'has json schema' do
     let(:args) { [project.tasks, { project: project }] }
 
-    it { is_expected.to match_json_schema('v1/tasks/collection') }
+    it { is_expected.to match_json_schema('v1/tasks/index') }
   end
 end

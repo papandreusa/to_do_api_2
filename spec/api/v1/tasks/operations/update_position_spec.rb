@@ -18,7 +18,7 @@ RSpec.describe Api::V1::Tasks::Operations::UpdatePosition, type: :operations do
 
   describe 'Failure ' do
     it_behaves_like 'task validation fails' do
-      let(:params) { { task_id: task.id, position: project.tasks.count.next } }
+      let(:params) { { task_id: task.id, position: project.tasks.count.next} }
     end
 
     it_behaves_like 'task created by other user'

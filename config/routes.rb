@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       end
 
       resources :tasks, only: %i[show update destroy] do
-        patch :complete, controller: :tasks_complete, action: :update
-        patch :position, controller: :tasks_position, action: :update
+        patch :complete, controller: :tasks_completes, action: :update
+        patch :position, controller: :tasks_positions, action: :update
       end
     end
   end

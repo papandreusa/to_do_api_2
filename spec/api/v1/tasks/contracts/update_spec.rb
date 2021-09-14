@@ -1,4 +1,4 @@
-RSpec.describe Api::V1::Tasks::Contracts::Update do
+RSpec.describe Api::V1::Tasks::Contracts::Default do
   subject(:validation) { contract.validate(params) }
 
   let(:contract) { described_class.new(task) }

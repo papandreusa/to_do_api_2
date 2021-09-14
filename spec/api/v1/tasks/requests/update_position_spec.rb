@@ -12,7 +12,7 @@ RSpec.describe 'Update Task Position', type: :request do
   end
 
   describe 'Success' do
-    include_examples 'has success status', schema: 'v1/tasks/instance'
+    include_examples 'has success status', schema: 'v1/tasks/show'
   end
 
   describe 'Failure' do
@@ -21,7 +21,7 @@ RSpec.describe 'Update Task Position', type: :request do
     end
 
     context 'when params is invalid' do
-      let(:params) { { position: project.tasks_count.next } }
+      let(:params) { { position: project.tasks_count.next.next } }
 
       include_examples 'has unprocessable entity status'
     end

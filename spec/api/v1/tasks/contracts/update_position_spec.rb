@@ -5,13 +5,18 @@ RSpec.describe Api::V1::Tasks::Contracts::UpdatePosition do
   let!(:project) { create(:project, :with_tasks) }
   let!(:task) { create(:task, project: project) }
 
+  context 'when params is valid' do
+    let(:params) { { position: 1 } }
+
+    it { is_expected.to be_truthy }
+  end
+
   context 'when invalid type of position' do
     let(:params) { { position: 'invalid position' } }
 
     it 'has errors' do
       expect { validation }.to change {
-        contract.errors.messages[:position]&.include?\
-          I18n.t('errors.be_integer')
+        contract.errors.messages[:position]&.include? 'must be an integer'
       }.to(true)
     end
   end
@@ -22,9 +27,7 @@ RSpec.describe Api::V1::Tasks::Contracts::UpdatePosition do
 
     it 'has errors' do
       expect { validation }.to change {
-        contract.errors.messages[:position]&.include?\
-          I18n.t('errors.be_between', min: Api::V1::Tasks::Constants::POSITION_MIN,
-                                      max: max_position)
+        contract.errors.messages[:position]&.include? 'must be less than or equal to 3'
       }.to(true)
     end
   end

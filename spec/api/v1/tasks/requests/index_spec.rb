@@ -10,7 +10,7 @@ RSpec.describe 'GET Tasks', type: :request do
   end
 
   describe 'Success' do
-    include_examples 'has success status', schema: 'v1/tasks/collection'
+    include_examples 'has success status', schema: 'v1/tasks/index'
   end
 
   describe 'Failture' do

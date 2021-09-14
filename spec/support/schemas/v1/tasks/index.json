@@ -2,8 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema",
   "type": "object",
   "required": [
-      "data",
-      "links"
+      "data"
   ],
   "properties": {
       "data": {
@@ -16,8 +15,7 @@
                           "id",
                           "type",
                           "attributes",
-                          "relationships",
-                          "links"
+                          "relationships"
                       ],
                       "properties": {
                           "id": {
@@ -79,25 +77,11 @@
                                       }
                                   }
                               }
-                          },
-                          "links": {
-                              "type": "object",
-                              "required": [
-                                  "self"
-                              ],
-                              "properties": {
-                                  "self": {
-                                      "type": "string"
-                                  }
-                              }
                           }
                       }
                   }
               ]
           }
-      },
-      "links": {
-          "type": "string"
       }
   }
 }
