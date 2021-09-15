@@ -18,19 +18,22 @@ RSpec.describe Api::V1::Tasks::Operations::Update, type: :operations do
     context 'when validation fails' do
       let(:params) { { id: task.id, due_date: 'string' } }
 
-      it { expect(operation['contract.default'].errors.messages[:due_date]).to be_include('must be a date') }
+      it { expect(operation['contract.default'].errors.messages[:due_date]).to match_array('must be a date') }
+      it { is_expected.to be_failure }
     end
 
     context 'when task is not found' do
       let(:task) { build(:task, id: 'invalid id') }
 
       it { expect(operation['model']).to be_nil }
+      it { is_expected.to be_failure }
     end
 
     context 'when task created by other user' do
       let!(:task) { create(:task) }
 
       it { expect(operation['result.policy.default']).to be_failure }
+      it { is_expected.to be_failure }
     end
   end
 end

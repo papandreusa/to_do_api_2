@@ -16,7 +16,10 @@ RSpec.describe Api::V1::Tasks::Contracts::UpdatePosition do
 
     before { contract.validate(params) }
 
-    it { expect(contract.errors.messages[:position]).to be_include 'must be an integer' }
+    it 'has errors' do
+      expect(contract.errors.messages[:position])
+        .to match_array(['must be an integer', 'must be greater than or equal to 1'])
+    end
   end
 
   context 'when invalid position' do
@@ -25,6 +28,6 @@ RSpec.describe Api::V1::Tasks::Contracts::UpdatePosition do
 
     before { contract.validate(params) }
 
-    it { expect(contract.errors.messages[:position]).to be_include 'must be less than or equal to 3' }
+    it { expect(contract.errors.messages[:position]).to match_array ['must be less than or equal to 3'] }
   end
 end

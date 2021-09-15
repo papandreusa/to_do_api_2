@@ -14,6 +14,7 @@ RSpec.describe Api::V1::Tasks::Operations::Index, type: :operations do
       let(:project) { build(:project, id: 'invalid id') }
 
       it { expect(operation['model']).to be_nil }
+      it { is_expected.to be_failure }
     end
   end
 end

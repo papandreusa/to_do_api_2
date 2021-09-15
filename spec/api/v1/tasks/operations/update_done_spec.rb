@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Tasks::Operations::UpdateDone, type: :operations do
     it { is_expected.to be_success }
 
     it 'change task`s status to done' do
-      expect { operation }.to(change { task.reload.done })
+      expect { operation }.to(change { task.reload.done }.from(false).to(true))
     end
   end
 
@@ -19,12 +19,14 @@ RSpec.describe Api::V1::Tasks::Operations::UpdateDone, type: :operations do
       let(:task) { build(:task, id: 'invalid id') }
 
       it { expect(operation['model']).to be_nil }
+      it { is_expected.to be_failure }
     end
 
     context 'when task created by other user' do
       let!(:task) { create(:task) }
 
       it { expect(operation['result.policy.default']).to be_failure }
+      it { is_expected.to be_failure }
     end
   end
 end

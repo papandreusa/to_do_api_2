@@ -10,12 +10,12 @@ RSpec.describe Api::V1::Tasks::Contracts::Default do
     it { expect(contract.validate(params)).to be_truthy }
   end
 
-  context 'when invalid name' do
-    let(:params) { { name: nil } }
+  context 'when invalid params' do
+    let(:params) { { name: nil  } }
 
     before { contract.validate(params) }
 
-    it { expect(contract.errors.messages[:name]).to be_include 'must be filled' }
+    it { expect(contract.errors.messages[:name]).to match_array ['must be filled'] }
   end
 
   context 'when invalid type of due_date' do
@@ -23,6 +23,6 @@ RSpec.describe Api::V1::Tasks::Contracts::Default do
 
     before { contract.validate(params) }
 
-    it { expect(contract.errors.messages[:due_date]).to be_include 'must be a date' }
+    it { expect(contract.errors.messages[:due_date]).to match_array(['must be a date']) }
   end
 end
