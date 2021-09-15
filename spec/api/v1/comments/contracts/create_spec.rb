@@ -3,7 +3,7 @@ RSpec.describe Api::V1::Comments::Contracts::Create do
 
   let(:contract) { described_class.new(Comment.new) }
   let(:params) { { body: body, images: images } }
-  let(:images) { [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comments::TEST_IMAGE), 'image/jpg')] }
+  let(:images) { [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comment::TEST_IMAGE), 'image/jpg')] }
   let(:body) { 'a' * Api::V1::Constants::Comment::BODY_MIN }
 
   describe 'Success' do
@@ -20,7 +20,7 @@ RSpec.describe Api::V1::Comments::Contracts::Create do
 
       it 'has error message' do
         expect(contract.errors.messages[:body])
-          .to be_include I18n.t('errors.not_less', number: Api::V1::Constants::Comment::BODY_MIN)
+          .to match_array(['size cannot be less than 10', 'size cannot be greater than 256'])
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Api::V1::Comments::Contracts::Create do
 
       it 'has error message' do
         expect(contract.errors.messages[:images])
-          .to be_include I18n.t('errors.invalid_file_size')
+          .to match_array(['file size is tooo big'])
       end
     end
   end

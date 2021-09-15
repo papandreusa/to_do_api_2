@@ -15,6 +15,7 @@ RSpec.describe Api::V1::Comments::Operations::Index, type: :operations do
       let(:task) { build(:task, id: 'invalid id') }
 
       it { expect(operation['model']).to be_nil }
+      it { is_expected.to be_failure }
     end
   end
 end

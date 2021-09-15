@@ -8,7 +8,7 @@ RSpec.describe 'Create comment', type: :request do
   let(:task) { create(:task, project: project) }
   let(:params) do
     { body: 'a' * Api::V1::Constants::Comment::BODY_MIN,
-      images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comments::TEST_IMAGE), 'image/jpg')] }
+      images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comment::TEST_IMAGE), 'image/jpg')] }
   end
 
   before do
@@ -35,7 +35,7 @@ RSpec.describe 'Create comment', type: :request do
     context 'when params is invalid' do
       let(:params) do
         { body: 'a' * Api::V1::Constants::Comment::BODY_MIN.pred,
-          images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comments::TEST_IMAGE), 'image/jpg')] }
+          images: [Rack::Test::UploadedFile.new(Rails.root.join(SpecConstants::Comment::TEST_IMAGE), 'image/jpg')] }
       end
 
       include_examples 'has unprocessable entity status'
