@@ -9,7 +9,7 @@ RSpec.describe Api::V1::Projects::Operations::Destroy, type: :operations do
 
   describe 'Success' do
     it { is_expected.to be_success }
-    it { expect { operation }.to(change(Project, :count).by(-1)) }
+    it { expect { operation }.to(change(Project, :count).from(3).to(2)) }
   end
 
   describe 'Failure' do

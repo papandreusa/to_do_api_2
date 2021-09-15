@@ -6,6 +6,6 @@ class Api::V1::Lib::Serializers::BaseSerializer
   end
 
   def collection_options(**)
-    raise NotImplementedError
+    {}
   end
 end

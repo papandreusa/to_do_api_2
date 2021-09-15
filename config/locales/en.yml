@@ -14,4 +14,6 @@ en:
     ivalid_format: has invalid format
     the_same_as: must be same as %{field}
     not_less: size cannot be less than %{number}
-    
+    be_between: 'must be between %{min} and %{max}'
+    be_date: 'must be a date'
+    be_integer: 'must be an integer'
