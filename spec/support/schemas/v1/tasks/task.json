@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "type": "object",
+            "required": [
+                "id",
+                "type",
+                "attributes",
+                "relationships",
+                "links"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "object",
+                    "required": [
+                        "name",
+                        "position",
+                        "due_date",
+                        "done"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "position": {
+                            "type": "integer"
+                        },
+                        "due_date": {
+                            "type": ["null", "string"]
+                        },
+                        "done": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "relationships": {
+                    "type": "object",
+                    "required": [
+                        "project"
+                    ],
+                    "properties": {
+                        "project": {
+                            "type": "object",
+                            "required": [
+                                "data"
+                            ],
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "required": [
+                                        "id",
+                                        "type"
+                                    ],
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "required": [
+                        "self"
+                    ],
+                    "properties": {
+                        "self": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

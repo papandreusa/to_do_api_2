@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "type": "object",
+  "properties": {
+      "data": {
+          "type": "object",
+          "properties": {
+              "id": {
+                  "type": "string"
+              },
+              "type": {
+                  "type": "string"
+              },
+              "attributes": {
+                  "type": "object",
+                  "properties": {
+                      "body": {
+                          "type": "string"
+                      },
+                      "image": {
+                          "type": ["string", "null"]
+                      }
+                  }
+              },
+              "relationships": {
+                  "type": "object",
+                  "properties": {
+                      "task": {
+                          "type": "object",
+                          "properties": {
+                              "data": {
+                                  "type": "object",
+                                  "properties": {
+                                      "id": {
+                                          "type": "string"
+                                      },
+                                      "type": {
+                                          "type": "string"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "links": {
+                  "type": "object",
+                  "properties": {
+                      "self": {
+                          "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
