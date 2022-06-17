@@ -19,6 +19,7 @@ executors:
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
           PGPORT: 5433
+          DATABASE_URL: "postgres://ubuntu@localhost:5433/to_do_api_2_test"
       - image: circleci/redis:alpine3.13
 
 commands:
