@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       post :auth, controller: :users, action: :create
@@ -22,4 +23,6 @@ Rails.application.routes.draw do
       get :api_docs, controller: :api_docs, action: :show, defaults: { format: 'html' }
     end
   end
+
+  root to: redirect('/api-docs')
 end
