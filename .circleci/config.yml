@@ -13,13 +13,13 @@ executors:
           BUNDLER_VERSION: 2.2.3
           RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       - image: circleci/postgres:12.0
-        - environment:
+        environment:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: to_do_api_2_test
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        - ports:
-          5432:5433
+        ports:
+          - 5432:5433
       - image: circleci/redis:alpine3.13
 
 commands:
