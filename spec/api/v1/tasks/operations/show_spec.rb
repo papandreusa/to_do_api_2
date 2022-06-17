@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Tasks::Operations::Show, type: :operations do
     it { is_expected.to be_success }
   end
 
-  describe 'Failure ' do
+  describe 'Failure' do
     context 'when task is not found' do
       let(:task) { build(:task, id: 'invalid id') }
 

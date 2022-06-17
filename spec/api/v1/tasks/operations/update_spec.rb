@@ -14,7 +14,7 @@ RSpec.describe Api::V1::Tasks::Operations::Update, type: :operations do
     end
   end
 
-  describe 'Failure ' do
+  describe 'Failure' do
     context 'when validation fails' do
       let(:params) { { id: task.id, due_date: 'string' } }
 

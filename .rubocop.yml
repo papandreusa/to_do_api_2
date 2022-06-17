@@ -80,3 +80,27 @@ Naming/MethodName:
 Rails/ApplicationController:
   Exclude:
     - 'app/controllers/api/v1/api_docs_controller.rb'
+
+RSpec/DescribeClass:
+   Exclude:
+    - 'spec/requests/api/v1/*.rb'
+
+RSpec/EmptyExampleGroup:
+   Exclude:
+    - 'spec/requests/api/v1/*.rb'
+
+RSpec/RepeatedDescription:
+   Exclude:
+    - 'spec/requests/api/v1/*.rb'
+
+RSpec/RepeatedExample:
+   Exclude:
+    - 'spec/requests/api/v1/*.rb'
+
+RSpec/ScatteredSetup:
+   Exclude:
+    - 'spec/requests/api/v1/*.rb'
+
+RSpec/VariableName:
+  Exclude:
+    - 'spec/requests/api/v1/*.rb'

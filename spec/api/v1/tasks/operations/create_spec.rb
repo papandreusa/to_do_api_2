@@ -13,7 +13,7 @@ RSpec.describe Api::V1::Tasks::Operations::Create, type: :operations do
     end
   end
 
-  describe 'Failure ' do
+  describe 'Failure' do
     context 'when validation fails' do
       let(:params) { { name: '', project_id: project.id } }
 

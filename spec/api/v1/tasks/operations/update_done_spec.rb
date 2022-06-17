@@ -14,7 +14,7 @@ RSpec.describe Api::V1::Tasks::Operations::UpdateDone, type: :operations do
     end
   end
 
-  describe 'failure ' do
+  describe 'failure' do
     context 'when task is not found' do
       let(:task) { build(:task, id: 'invalid id') }
 

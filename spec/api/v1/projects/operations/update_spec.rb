@@ -13,7 +13,7 @@ RSpec.describe Api::V1::Projects::Operations::Update, type: :operations do
     end
   end
 
-  describe 'Failure ' do
+  describe 'Failure' do
     it_behaves_like 'project validation fails'
     it_behaves_like 'project not found'
     it_behaves_like 'project created by other user'

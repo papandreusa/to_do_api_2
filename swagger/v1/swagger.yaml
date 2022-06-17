@@ -1,0 +1,315 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/tasks/{task_id}/comments":
+    parameters:
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  default: bla bla
+                  nullable: false
+              required:
+              - body
+  "/api/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects":
+    get:
+      summary: list projects
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create project
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: project created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: project
+                description:
+                  type: string
+                  default: "..."
+              required:
+              - name
+  "/api/v1/projects/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show project
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: Not Found
+    patch:
+      summary: update project
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: foo
+                description:
+                  type: string
+                  default: 
+    put:
+      summary: update project
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: foo
+                description:
+                  type: string
+                  default: 
+    delete:
+      summary: delete project
+      tags:
+      - Projects
+      security:
+      - bearer: []
+      responses:
+        '204':
+          description: successful
+  "/api/v1/projects/{project_id}/tasks":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list tasks
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create task
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: created successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: task
+                due_date:
+                  type: string
+                  default: 
+                position:
+                  type: integer
+                  default: 0
+                done:
+                  type: boolean
+                  default: false
+              required:
+              - name
+              - position
+              - done
+  "/api/v1/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show task
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update task
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: task
+                due_date:
+                  type: string
+                  default: 
+                position:
+                  type: integer
+                  default: 0
+                done:
+                  type: boolean
+                  default: false
+    put:
+      summary: update task
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: task
+                due_date:
+                  type: string
+                  default: 
+                position:
+                  type: integer
+                  default: 0
+                done:
+                  type: boolean
+                  default: false
+              required:
+              - name
+              - position
+              - done
+    delete:
+      summary: delete task
+      tags:
+      - Tasks
+      security:
+      - bearer: []
+      responses:
+        '204':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
+components:
+  securitySchemes:
+    bearer:
+      description: "..."
+      type: apiKey
+      name: Authorization
+      in: header
