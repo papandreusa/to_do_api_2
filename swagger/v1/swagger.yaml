@@ -332,6 +332,34 @@ paths:
       responses:
         '204':
           description: successful
+  "/api/v1/auth":
+    post:
+      summary: create user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: created successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  default: test
+                password:
+                  type: string
+                  default: Abc12345
+                password_confirmation:
+                  type: string
+                  default: Abc12345
+              required:
+              - username
+              - password
+              - password_confirmation
 servers:
 - url: http://{defaultHost}
   variables:
