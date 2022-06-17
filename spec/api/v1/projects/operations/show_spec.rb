@@ -9,7 +9,7 @@ RSpec.describe Api::V1::Projects::Operations::Show, type: :operations do
     it { is_expected.to be_success }
   end
 
-  describe 'failure ' do
+  describe 'failure' do
     it_behaves_like 'project not found'
     it_behaves_like 'project created by other user'
   end

@@ -22,6 +22,8 @@ gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 6.1.4.1'
 gem 'redis', '~> 4.4'
 gem 'reform-rails', '~> 0.2'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'simple_endpoint', '~> 1.0.0'
 gem 'trailblazer', '~> 2.1'
 gem 'trailblazer-rails', '~> 2.1'
@@ -33,6 +35,7 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3'
   gem 'regexp-examples', '~> 1.5'
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'rswag-specs'
   gem 'rubocop', '~> 1.12', require: false
   gem 'rubocop-performance', '~> 1.10', require: false
   gem 'rubocop-rails', '~> 2.9', require: false

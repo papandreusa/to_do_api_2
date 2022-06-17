@@ -14,7 +14,7 @@ RSpec.describe Api::V1::Tasks::Operations::UpdatePosition, type: :operations do
     end
   end
 
-  describe 'Failure ' do
+  describe 'Failure' do
     context 'when validation fails' do
       let(:params) { { task_id: task.id, position: project.tasks.count.next } }
 
