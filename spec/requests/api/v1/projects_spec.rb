@@ -9,7 +9,13 @@ RSpec.describe 'api/v1/projects', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
+        let(:password) { 'Abc123456' }
+        let(:user) { create(:user, password: password) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
+
+        before do
+          create_list(:project, 2, user: user)
+        end
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -38,6 +44,7 @@ RSpec.describe 'api/v1/projects', type: :request do
       }
 
       response(201, 'project created') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
         let(:project) { { name: 'foo', description: 'bla bla' } }
 
@@ -63,8 +70,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:id) { '123' }
+        let(:project) { create(:project, user: user) }
+        let(:id) { project.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -77,16 +86,9 @@ RSpec.describe 'api/v1/projects', type: :request do
         run_test!
       end
       response(404, 'Not Found') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
         let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
 
         run_test!
       end
@@ -106,9 +108,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       }
 
       response(200, 'successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:id) { '123' }
-        let(:project) { { description: '...' } }
+        let(:project) { create(:project, user: user) }
+        let(:id) { project.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -136,9 +139,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       }
 
       response(200, 'successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:id) { '123' }
-        let(:project) { { name: 'foofoo' } }
+        let(:project) { create(:project, user: user) }
+        let(:id) { project.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -157,16 +161,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       security [bearer: []]
 
       response(204, 'successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        let(:project) { create(:project, user: user) }
+        let(:id) { project.id }
 
         run_test!
       end

@@ -9,11 +9,9 @@ paths:
       summary: create session
       tags:
       - Sessions
-      security:
-      - bearer: []
       parameters: []
       responses:
-        '200':
+        '201':
           description: sign in successful
       requestBody:
         content:
@@ -91,8 +89,8 @@ paths:
       security:
       - bearer: []
       responses:
-        '200':
-          description: successful
+        '204':
+          description: deleted successful
   "/api/v1/projects":
     get:
       summary: list projects

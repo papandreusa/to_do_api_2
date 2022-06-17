@@ -112,3 +112,7 @@ Naming/FileName:
 Style/StringConcatenation:
   Exclude:
     - 'config/initializers/rswag_api.rb'
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - 'spec/requests/api/v1/**/*.rb'

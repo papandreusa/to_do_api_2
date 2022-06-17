@@ -4,7 +4,6 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
   path '/api/v1/auth/sign_in' do
     post('create session') do
       tags 'Sessions'
-      security [bearer: []]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :user, in: :body, schema: {
@@ -16,6 +15,14 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
       }
 
       response(201, 'sign in successful') do
+        let(:username) { 'test' }
+        let(:password) { 'udfshjh878' }
+        let(:user) { { username: 'test', password: password } }
+
+        before do
+          create(:user, username: username, password: password)
+        end
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -39,14 +46,7 @@ RSpec.describe 'api/v1/auth/sessions', type: :request do
       response(204, 'sign out successful') do
         let(:Authorization) { "Bearer #{token_for(user)}" }
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-
+        let(:user) { create(:user) }
         run_test!
       end
     end

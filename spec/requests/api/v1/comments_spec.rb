@@ -11,8 +11,11 @@ RSpec.describe 'api/v1/comments', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:task_id) { '123' }
+        let(:project) { create(:project, user: user) }
+        let(:task) { create(:task, project: project) }
+        let(:task_id) { task.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -31,7 +34,7 @@ RSpec.describe 'api/v1/comments', type: :request do
       security [bearer: []]
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :task, in: :body, schema: {
+      parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
           body: { type: :string, default: 'bla bla', nullable: false }
@@ -40,8 +43,12 @@ RSpec.describe 'api/v1/comments', type: :request do
       }
 
       response(201, 'created successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:task_id) { '123' }
+        let(:project) { create(:project, user: user) }
+        let(:task) { create(:task, project: project) }
+        let(:task_id) { task.id }
+        let(:comment) { { body: 'bla bla bla bla' } }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -66,17 +73,13 @@ RSpec.describe 'api/v1/comments', type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      response(200, 'successful') do
+      response(204, 'deleted successful') do
+        let(:user) { create(:user) }
         let(:Authorization) { "Bearer #{token_for(user)}" }
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        let(:project) { create(:project, user: user) }
+        let(:task) { create(:task, project: project) }
+        let(:comment) { create(:comment, task: task) }
+        let(:id) { comment.id }
 
         run_test!
       end

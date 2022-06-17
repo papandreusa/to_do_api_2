@@ -51,3 +51,7 @@ RSpec.configure do |config|
   # Defaults to json. Accepts ':json' and ':yaml'.
   config.swagger_format = :yaml
 end
+
+def token_for(user)
+  JWTSessions::Session.new(payload: { user_id: user.id }, refresh_by_access_allowed: true).login[:access]
+end
