@@ -4,6 +4,39 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/auth/sign_in":
+    post:
+      summary: create session
+      tags:
+      - Sessions
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: sign in successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  default: test
+                password:
+                  type: string
+                  default: Q12345678
+  "/api/v1/auth/sign_out":
+    delete:
+      summary: delete session
+      tags:
+      - Sessions
+      security:
+      - bearer: []
+      responses:
+        '204':
+          description: sign out successful
   "/api/v1/tasks/{task_id}/comments":
     parameters:
     - name: task_id
@@ -29,8 +62,8 @@ paths:
       - bearer: []
       parameters: []
       responses:
-        '200':
-          description: successful
+        '201':
+          description: created successful
       requestBody:
         content:
           application/json:

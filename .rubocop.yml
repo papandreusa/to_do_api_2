@@ -83,24 +83,32 @@ Rails/ApplicationController:
 
 RSpec/DescribeClass:
    Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
 
 RSpec/EmptyExampleGroup:
    Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
 
 RSpec/RepeatedDescription:
    Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
 
 RSpec/RepeatedExample:
    Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
 
 RSpec/ScatteredSetup:
    Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
 
 RSpec/VariableName:
   Exclude:
-    - 'spec/requests/api/v1/*.rb'
+    - 'spec/requests/api/v1/**/*.rb'
+
+Naming/FileName:
+  Exclude:
+    - 'config/initializers/rswag-ui.rb'
+
+Style/StringConcatenation:
+  Exclude:
+    - 'config/initializers/rswag_api.rb'
